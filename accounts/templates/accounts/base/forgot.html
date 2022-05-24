@@ -1,0 +1,83 @@
+{% extends 'accounts/base/base.html' %}
+{% load static %}
+{% block title %}
+<title>Forgot Password | Solomartel</title>
+{% endblock %}
+
+{% block styles_page %}
+<style>
+  label::after {
+    content: "*";
+    color: red;
+  }
+ .checkbox:after{
+  content: none;
+  }
+.g_st.without-after-element:after {
+    content: none;
+
+  }
+  .form-control.has-error {
+    border: 1px solid #FB404B !important;
+    color: #FB404B !important;
+}
+
+.form-control.has-success {
+    border: 1px solid #28a745 !important;
+    color: #28a745 !important;
+
+}
+.error-msg {
+    color: red;
+    font-size: 13px;
+    margin: 3px;
+}
+
+</style>
+{% endblock styles_page %}
+
+{% block content %}
+            <div class="widget-content ">
+                {% if msg %}
+                <div class="alert {% if success %} alert-success {% else %} alert-danger {% endif %}" id="msg">{{msg}}</div>
+                {% endif %}
+
+                <form method="POST" action="{% url 'accounts:forgot_password' %}" id="forgotSubmit">
+                    {% csrf_token %}
+
+                    <div id="form_div">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label class="control-label col-sm-12" for="uname">Email Address</label>
+                                    <div class="col-sm-12">
+                                        <input type="text" class="form-control" minlength="3"
+                                               maxlength="60" id="user_name_login"
+                                               placeholder="Enter Email Address" name="email"
+                                               onkeyup="Email_check_login()">
+                                        <span class="error-msg"
+                                              id="email_label_edit_login"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                        <div class="row mt-5">
+                            <div class="col-sm-5 align-self-start">
+                            </div>
+                            <button style="background-color: #353578;border-color:#2a72d2" type="submit"
+                                    class="btn btn-success">Reset Password
+                            </button>
+
+                        </div>
+                    </div>
+                </form>
+                <a href="{% url 'accounts:login' %}">Back to login</a>
+            </div>
+{% endblock content%}
+
+{% block scripts_page %}
+<script src="{% static 'js/forgot.js' %}"></script>
+{% endblock scripts_page %}

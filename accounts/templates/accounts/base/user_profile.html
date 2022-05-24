@@ -1,0 +1,387 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block title %}
+<title>Profile - SolomartelHoldings</title>
+{% endblock title %}
+
+{% block active_tab %}
+                                <li class="rd-nav-item">
+                                    <a class="rd-nav-link" href="{% url 'base:home' %}">Home</a>
+                                </li>
+                                <li class="rd-nav-item">
+                                    <a class="rd-nav-link" href="{% url 'base:investments' %}">
+                                        Investments
+                                    </a>
+                                </li>
+                                
+                                <li class="rd-nav-item">
+                                    <a class="rd-nav-link" href="{% url 'base:faq' %}">
+                                        FAQ
+                                    </a>
+                                </li>
+                                <li class="rd-nav-item"><a class="rd-nav-link"
+                                                           href="{% url 'base:contacts' %}">Contact</a>
+                                </li>
+{% endblock active_tab %}
+
+{% block content %}
+<div class="preloader">
+    <div class="preloader-logo"><img src="{% static 'images/logo.png' %}" alt="" width="201px" height="94px"
+                                     srcset="{% static 'images/logo.png' %} 2x"/>
+    </div>
+    <div class="preloader-body">
+        <div id="loadingProgressG">
+            <div class="loadingProgressG" id="loadingProgressG_1"></div>
+        </div>
+    </div>
+</div>
+<link rel="stylesheet" href="{% static 'css/new_style.css' %}" id="main-styles-link">
+<!-- Breadcrumbs -->
+<style>
+   h1{
+   color:green;
+   text-align:center;
+   }
+   .card {
+   width: 1025px;
+   }
+   .form-control.has-error {
+    border: 1px solid #FB404B !important;
+    color: #FB404B !important;
+}
+.card .alert.alert-danger {
+    padding: 25px 10px;
+}
+
+.alert-success {
+    padding: 19px !important;
+}
+
+.form-control.has-success {
+    border: 1px solid #28a745 !important;
+    color: #28a745 !important;
+
+
+
+</style>
+<div class="page">
+    <br><br><br><br><br>
+    <div id="boxes">
+        <div class="container">
+            <nav>
+                <div class="nav nav-tabs " id="nav-tab" role="tablist">
+                    <div class="layout-bordered">
+                        <a data-toggle="tab" style="margin-left: 160px" class="nav-item nav-link active" id="personal_tab"
+                           href="#div_personal" role="tab"
+                           aria-controls="nav-contact" aria-selected="false"><em class="fa fa-user"></em><br> Account
+                            Info</a>
+                        <a data-toggle="tab" style="margin-left: 100px" class="nav-item nav-link " id="address_tab"
+                           href="#address" role="tab"
+                           aria-controls="nav-profile" aria-selected="false"><em class="fa fa-map-marker"
+                                                                                 aria-hidden="true"></em><br> Address
+                            Info</a>
+                        <a data-toggle="tab" style="margin-left: 100px" class="nav-item nav-link" id="bank_Account"
+                           href="#bank_tab" role="tab"
+                           aria-controls="nav-contact" aria-selected="false"><em class="fa fa-user"></em><br>Bank
+                            Account</a>
+                        <a data-toggle="tab" style="margin-left: 100px" class="nav-item nav-link" id="password_tab"
+                           href="#password" role="tab"
+                           aria-controls="nav-contact" aria-selected="false"><em class="fa fa-cog"></em><br>Password
+                            Reset</a>
+                    </div>
+                </div>
+                <nav>
+                    <br>
+                    <br>
+                    <div class="card" style="margin-left: 100px">
+                        <div class="card-header">
+                            <h4 class="card-title">Edit Profile</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="alert alert-danger" id="show_ajx_msg_error" style="display: none;"></div>
+                            <div class="alert alert-success" id="show_ajx_msg" style="display: none;"></div>
+                            <div class="tab-content" id="nav-tabContent">
+                                <!--  -->
+                                <div class="tab-pane fade show active" id="div_personal" role="tabpanel">
+                                    <form method="post" name="updateform" class="updateform"
+                                          action="{% url 'accounts:update_personal_data' %}" id="personal_form">
+                                        {% csrf_token %}
+                                        <div class="row">
+                                            <div class="col-md-6 pr-1">
+                                                <div class="form-group">
+                                                    <label>Legal Name<span class="star_text" id="starB">*</span></label>
+                                                    <input type="text" class="form-control w-100"
+                                                           placeholder="Legal Name" value="{{ user_obj.legal_name }}"
+                                                           name="legal_name" id="legal_name_profile" minlength="3"
+                                                           maxlength="19" onkeyup="legal_name_check_profile()">
+                                                    <span class="error-msg" id="legal_name_profile_label"></span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 pl-1 pr-3">
+                                                <div class="form-group">
+                                                    <label>UserName<span class="star_text" id="starC">*</span></label>
+                                                    <input type="text" class="form-control w-100"
+                                                           placeholder="Username" value="{{ user.username }}"
+                                                           name="user_name" id="user_name_profile"
+                                                           minlength="3" maxlength="60"
+                                                           onkeyup="UserNameCheckProfile()">
+                                                    <span class="error-msg" id="username_profile_label"></span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 pl-4">
+                                                <div class="form-group">
+                                                    <label>SSN<span class="star_text"
+                                                                    id="starD">*</span></label>
+                                                    <input type="text" class="form-control" id="ssn_profile"
+                                                           placeholder="SSN" name="ssn" 
+                                                           onkeyup="ssn_check_fun_profile()"
+                                                           value="{{ user_obj.SSN  }}">
+                                                    <span class="error-msg" id="ssn_label_profile"></span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 pr-1" style="padding-top:7px; margin-left:-19px;">
+                                                <div class="form-group">
+                                                    <label>Mobile Number<span class="star_text"
+                                                                              id="starE">*</span></label>
+                                                    <input type="text" class="form-control" id="phone"
+                                                           placeholder="Mobile Number"
+                                                           value="{{ user_obj.phone_number }}"
+                                                           minlength="9" maxlength="16"
+                                                           onkeyup="MobileNumberCheckProfile()"
+                                                           name="mobile">
+                                                    <span class="error-msg" id="update_phone_number"></span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 pl-1 pr-3">
+                                                <div class="form-group">
+                                                    <label for="email">Email address<span class="star_text"
+                                                                                          id="starF">*</span></label>
+                                                    <input type="email" class="form-control" placeholder="Email"
+                                                           value="{{ user.email }}" name="email" id="email" disabled=""
+                                                           onkeyup="validatemaill()">
+                                                    <span style="display: none;" class="error-msg"
+                                                          id="label_your_email">This field is required</span>
+                                                    <span style="display: none;" class="error-msg"
+                                                          id="label_your_email1">Invalid Email</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                            <div class="col-md-12 pl-3 pl-1">
+                                                <button type="submit" style="margin-left: 400px !important; background-color: #0a4a7f;"
+                                                        class="btn btn-info btn-fill "
+                                                        id="btn_personal_profile">Update Profile
+                                                </button>
+                                            </div>
+                                    </form>
+                                </div>
+                                <div class="tab-pane fade" id="address" role="tabpanel">
+                                    <form method="post" name="updateadressform" class="updaddteform"
+                                          action="{% url 'accounts:update_address_data' %}" id="updateadressform">
+                                        {% csrf_token %}
+
+                                        <div class="row">
+                                            <div class="col-md-6 pr-1">
+                                                <div class="form-group">
+                                                    <label>Address<span class="star_text"
+                                                                        id="starG">*</span></label>
+                                                    <input type="text" class="form-control " placeholder="Address"
+                                                           value="{{ user_obj.address }}"
+                                                           name="address" id="address_tab_field"
+                                                           onkeyup="adresslinevalid()" minlength="3" maxlength="56">
+                                                    <span class="error-msg" id="address_label_profile"></span>
+
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 pl-1">
+                                                <div class="form-group">
+                                                    <label>City</label>
+                                                    <input type="text" class="form-control"
+                                                           placeholder="City" value="{{ user_obj.city }}"
+                                                           name="city" id="city_Addres_prfile"
+                                                           minlength="3" maxlength="19"
+                                                           onkeyup="ValidateCity()">
+                                                    <span class="error-msg" id="spanline2_city"></span>
+                                                </div>
+                                            </div>
+                                       
+                                            <div class="col-md-4 pr-1">
+                                                <div class="form-group">
+                                                    <label>Region/State/Provience</label>
+                                                    <input type="text" class="form-control" name="region"
+                                                           id="region_addres"
+                                                           value="{{user_obj.region}}"
+                                                           minlength="3" maxlength="19"
+                                                           onkeyup="region_valid_profile()">
+                                                    <span class="error-msg" id="region_label_profile"></span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 px-1">
+                                                <div class="form-group">
+                                                    <label>Zip Code<span class="star_text" id="starJ">*</span></label>
+                                                    <input type="text" class="form-control"
+                                                           id="zipcode_number_profile"
+                                                           placeholder="Zip code" value="{{ user_obj.zip }}"
+                                                           minlength="3" maxlength="50" onkeyup="ProfileZipCode()"
+                                                           name="zipcode">
+                                                    <span class="error-msg" id="post_townn"></span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 pl-1 pr-3">
+                                                <div class="form-group pr-1">
+                                                    <label>Country<span class="star_text"
+                                                                        id="starK">*</span></label>
+                                                    <input type="name" class="form-control"
+                                                           value="{{ user_obj.country }}" disabled="">
+                                                    <span style="display: none;" class="error-msg" id="zip_code">This field is required</span>
+                                                    <span style="display: none;" class="error-msg" id="zip_code1">It only contains 6 to 12 characters</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 pl-3 pl-1">
+                                                <button style="margin-left: 400px !important; background-color: #0a4a7f;" type="submit"
+                                                        class="btn btn-info btn-fill" id="adress_info_btn">
+                                                    Update Profile
+                                                </button>
+                                            </div>
+
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="bank_tab" role="tabpanel">
+                                <form method="post" name="updateform" class="updateform"
+                                      action="{% url 'accounts:update_bank_data' %}" id="UpdateBankForm">
+                                    {% csrf_token %}
+                                    <div class="row">
+                                        <div class="col-md-6 pr-1">
+                                            <div class="form-group">
+                                                <label>Type of Account<span class="star_text"
+                                                                            id="starB">*</span></label>
+                                                <select class="form-control" name="titlefield" id="title_select">
+                                                    <!--onchange="title_valid()"-->
+                                                    {% if user_obj.account_type == 'checking_account' %}
+                                                    <option value="checking_account">Checking Account</option>
+                                                    <option value="saving_account">Saving Account</option>
+                                                    {% else %}
+                                                    <option value="saving_account">Saving Account</option>
+                                                    <option value="checking_account">Checking Account</option>
+                                                    {% endif %}
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 pl-1 pr-3">
+                                            <div class="form-group">
+                                                <label>Account Number<span class="star_text" id="starC">*</span></label>
+                                                <input type="number" class="form-control w-100"
+                                                       placeholder="Account Number"
+                                                       value="{{ user_obj.my_accounts.all.0.account_number }}"
+                                                       name="acc_number" id="account_no_profile"
+                                                       minlength="" maxlength="16"
+                                                       onkeyup="AccountProfileNumber()">
+                                                <span class="error-msg" id="label_acc_number_profile"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 pl-4">
+                                            <div class="form-group">
+                                                <label>Financial Institution/Bank Name <span class="star_text"
+                                                                                             id="starE">*</span></label>
+                                                <input type="text" class="form-control" id="bank_Account_Fin_profile"
+                                                       placeholder="Financial Institution/Bank Name "
+                                                       value="{{ user_obj.bank_name }}"
+                                                       minlength="5" maxlength="16"
+                                                       onkeyup="Financial_ProfileValidate()"
+                                                       name="financial">
+                                                <span class="error-msg"
+                                                      id="bank_Account_Fin_label"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 pr-1">
+                                            <div class="form-group">
+                                                <label>Swift Code<span class="star_text"
+                                                                       id="starD">*</span></label>
+                                                <input type="number" class="form-control"
+                                                       name="swift_code" id="swift_code_field"
+                                                       value="{{user_obj.swift_code }}"
+                                                       onkeyup="SwiftProfileCodeLabel()">
+                                                <span class="error-msg" id="swift_profile_code_label"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 pl-1 pr-3">
+                                            <div class="form-group">
+                                                <label for="starF">Account Status<span class="star_text"
+                                                                                       id="starF">*</span></label>
+                                                <input class="form-control" type="text" value="Active" disabled=""
+                                                >
+                                            </div>
+                                        </div>
+                                    </div>
+                                        <button style="margin-left: 400px !important; background-color: #0a4a7f;" type="submit"
+                                                class="btn btn-info btn-fill "
+                                                id="bank_btton_profile">Update Profile
+                                        </button>
+                                </form>
+
+                            </div>
+                            <div class="tab-pane fade" id="password" role="tabpanel">
+                                <form method="post" name="change_pasw" class="change_paswdd" id="change_pasw_form"
+                                      action="{% url 'accounts:change_password' %}">
+                                    {% csrf_token %}
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Old Password<span class="star_text" id="starM">*</span> </label>
+                                                <input type="password" class="form-control" minlength="3" maxlength="19"
+                                                       placeholder="Old Password" value="" name="old_psw" id="odl_psw"
+                                                       onkeyup="oldpassword()">
+                                                <span style="display: none;" id="span_oldpassword" class="error-msg">This field is required</span>
+                                                <span style="display: none;" id="span_oldpassword1" class="error-msg">Password must contains 6 to 18 characters</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>New Password<span class="star_text" id="starN">*</span></label>
+                                                <input type="password" class="form-control" placeholder="New Password"
+                                                       name="nw_psw" id="new_psw" minlength="3" maxlength="19"
+                                                       onkeyup="newpassword()">
+                                                <span id="box" onclick="eye()"
+                                                      class="zmdi zmdi-eye field-icon toggle-password"><em
+                                                        class="fa fa-eye"
+                                                        aria-hidden="true"></em></span>
+                                                <span style="display: none;" class="error-msg" id="span_chng"> This field is required </span>
+                                                <span style="display: none;" class="error-msg" id="span_chng1">Password must contains 6 to 18 characters</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        <div class="col-md-6 pr-0" style="margin-left:-17px">
+                                            <div class="form-group" >
+                                                <label>Confirm New Password<span class="star_text"
+                                                                                 id="starO">*</span></label>
+                                                <input type="password" class="form-control"
+                                                       placeholder="Confirm New Password"
+                                                       name="confirm_new_eepsw" id="confirm_new_eepsw" minlength="3"
+                                                       maxlength="19" onkeyup="newconfpassword()">
+                                                <span id="box1" onclick="eye1()"
+                                                      class="zmdi zmdi-eye field-icon toggle-password"><em
+                                                        class="fa fa-eye"
+                                                        aria-hidden="true"></em></span>
+                                                <span style="display: none;" id="span_confirm_password"
+                                                      class="error-msg">This field is required</span>
+                                                <span style="display: none;" id="span_confirm_password1"
+                                                      class="error-msg">Password must contains 6 to 18 characters</span>
+                                                <span style="display: none;" id="span_confirm_password2"
+                                                      class="error-msg">Password is not matched</span>
+                                            </div>
+                                    </div>
+                                    <button style="margin-left: 400px !important" type="submit" id="change_psw_function"
+                                            class="btn btn-info btn-fill ">Reset Password
+                                    </button>
+                            </div>
+
+                        </div>
+                    </div>
+        </div>
+    </div>
+    <br>
+    <br>
+    <br>
+
+    {% endblock content %}

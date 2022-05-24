@@ -1,0 +1,158 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block title %}
+<title>Invest - Solomartel</title>
+{% endblock title %}
+
+
+{% block active_tab %}
+                                <li class="rd-nav-item ">
+                                    <a class="rd-nav-link" href="{% url 'base:home' %}">Home</a>
+                                </li>
+                                <li class="rd-nav-item active">
+                                    <a class="rd-nav-link" href="{% url 'base:investments' %}">
+                                        Investments
+                                    </a>
+                                </li>
+                                
+                                <li class="rd-nav-item">
+                                    <a class="rd-nav-link" href="{% url 'base:faq' %}">
+                                        FAQ
+                                    </a>
+                                </li>
+                                <li class="rd-nav-item"><a class="rd-nav-link"
+                                                           href="{% url 'base:contacts' %}">Contact</a>
+                                </li>
+{% endblock active_tab %}
+
+{% block content %}
+
+<style type="text/css">
+   .form-control.has-error {
+   border: 1px solid #FB404B !important;
+   color: #FB404B !important;
+   }
+   .form-control.has-success {
+   border: 1px solid #28a745 !important;
+   color: #28a745 !important;
+   }
+   .error-msg {
+   color: red;
+   font-size: 13px;
+   margin: 3px;
+   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+</style>
+<link rel="stylesheet" href="{% static 'css/new_style.css' %}" id="main-styles-link">
+<div class="preloader">
+    <div class="preloader-logo"><img src="{% static 'images/logo.png' %}" alt="" width="201px" height="94px"
+                                     srcset="{% static 'images/logo.png' %} 2x"/>
+    </div>
+    <div class="preloader-body">
+        <div id="loadingProgressG">
+            <div class="loadingProgressG" id="loadingProgressG_1"></div>
+        </div>
+    </div>
+</div>
+<section class=" container section novi-background" style="padding-top: 75px;">
+
+    <h4 class="p-2">Step 1: Submit Offer</h4>
+    {% if msg %}
+    <div class="alert alert-danger" id="msg">{{msg}}</div>
+    {% endif %}
+    {% if success_msg %}
+    <div class="alert alert-success" id="msg">{{success_msg}}</div>
+    {% endif %}
+    <div role="form" class="wpcf7" id="wpcf7-f8293-p8709-o4" lang="en-US" dir="ltr">
+        <div class="screen-reader-response"></div>
+        <form action="{% url 'base:investment_form' investment_record.name %}"
+              method="post"
+              id="investment_amount_form" class="wpcf7-form">
+            {% csrf_token %}
+            <div class="row justify-content-center">
+                <div class="col-xs-12 col-sm-12">
+                    <div class="form-group">
+                        <strong><label>Invest in </label></strong><br>
+                        <span class="wpcf7-form-control-wrap propertyname"><input
+                                type="text" name="propertyname"
+                                value="{{investment_record.name}}" disabled="disabled"
+                                class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required form-control "
+                                readonly="readonly" aria-required="true"></span>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12">
+                    <div class="form-group">
+                        <strong><label>Investment amount (in USD
+                            $) </label></strong><br>
+                        <span class="wpcf7-form-control-wrap investmentamount"><input
+                                type="number" name="investmentamount"
+                                id="investment_amount"
+                                class="wpcf7-form-control wpcf7-number wpcf7-validates-as-required wpcf7-validates-as-number form-control"
+                                onkeyup="Investment_check()"
+                                placeholder="Minimum amount: {{ investment_record.minimum_investment }}"></span>
+                        <span class="error-msg"
+                              id="email_label_edit_login" style="cursor: pointer;"></span>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12">
+                    <div class="form-group">
+                        <strong><label>Email </label></strong><br>
+                        <span class="wpcf7-form-control-wrap email"><input type="text"
+                                                                           name="email_investoment_input"
+                                                                           size="40"
+                                                                           id="email_investoment"
+                                                                           class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required form-control"
+                                                                           value="{{user.email}}"
+                                                                           disabled></span>
+                        <span class="error-msg"
+                              id="email_label_check_label"></span>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12">
+                    <div class="form-group">
+                        <strong><label>Enter your special Solomartel invitation or member code here. (if you have one)</label></strong><br>
+                        <span class="wpcf7-form-control-wrap phonenumber"><input
+                                type="text"
+                                name="promocode"
+                                size="40"
+                                id=""
+                                class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required form-control"
+                        ></span>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12">
+                    <div class="form-group">
+                                       <span class="wpcf7-form-control-wrap acceptance-430"><span
+                                               class="wpcf7-form-control wpcf7-acceptance"><span
+                                               class="wpcf7-list-item"><input type="checkbox" id="checked_true">
+                                       <span class="error-msg" id="checked_label"></span>
+                                       <strong><span class="wpcf7-list-item-label">The invested amount needs to be
+                                       fully covered.</span></strong></span></span></span>
+                    </div>
+                </div>
+                <br><br>
+                <div class="col-xs-10 col-sm-10 text-center">
+                    <br>
+                    <input type="submit" value="Confirm and continue"
+                           class="btn text-white"
+                           style="background-color: #0a4a7f !important;"><span
+                        class="ajax-loader"></span>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</section>
+{% endblock content %}

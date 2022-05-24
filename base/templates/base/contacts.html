@@ -1,0 +1,148 @@
+{% extends 'base/base.html' %}
+{% load static %}
+ 
+{% block title %}
+<title>Contact - SolomartelHoldings</title>
+{% endblock title %}
+
+
+
+{% block active_tab %}
+                                <li class="rd-nav-item ">
+                                    <a class="rd-nav-link" href="{% url 'base:home' %}">Home</a>
+                                </li>
+                                <li class="rd-nav-item">
+                                    <a class="rd-nav-link" href="{% url 'base:investments' %}">
+                                        Investments
+                                    </a>
+                                </li>
+                                
+                                <li class="rd-nav-item">
+                                    <a class="rd-nav-link" href="{% url 'base:faq' %}">
+                                        FAQ
+                                    </a>
+                                </li>
+                                <li class="rd-nav-item active"><a class="rd-nav-link"
+                                                           href="{% url 'base:contacts' %}">Contact</a>
+                                </li>
+{% endblock active_tab %}
+
+
+{% block content %}
+
+<div class="preloader">
+    <div class="preloader-logo"><img src="{% static 'images/logo.png' %}" alt="" width="201px" height="94px"
+                                     srcset="{% static 'images/logo.png' %} 2x"/>
+    </div>
+    <div class="preloader-body">
+        <div id="loadingProgressG">
+            <div class="loadingProgressG" id="loadingProgressG_1"></div>
+        </div>
+    </div>
+</div>
+<!-- Breadcrumbs -->
+<section class="section novi-background breadcrumbs-custom bg-image context-dark"
+         style="background-image: url({% static 'images/background.png' %});">
+    <div class="breadcrumbs-custom-inner">
+        <div class="container breadcrumbs-custom-container">
+            <div class="breadcrumbs-custom-main">
+                <h6 class="breadcrumbs-custom-subtitle title-decorated">Contact</h6>
+                <h2 class="text-uppercase breadcrumbs-custom-title">Contact</h2>
+            </div>
+            <ul class="breadcrumbs-custom-path">
+                <li><a href="{% url 'base:home' %}">Home</a></li>
+                <li class="active">Contact</li>
+            </ul>
+        </div>
+    </div>
+</section>
+<section class="section novi-background section-sm">
+    <div class="container">
+        <div class="layout-bordered">
+            <div class="layout-bordered-item wow-outer">
+                <div class="layout-bordered-item-inner wow slideInUp">
+                    <div class="icon novi-icon icon-lg mdi mdi-phone text-primary" style="color: #0a4a7f;"></div>
+                    <ul class="list-0">
+                        <li style="cursor:default;">+1-412-2034-269</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="layout-bordered-item wow-outer">
+                <div class="layout-bordered-item-inner wow slideInUp">
+                    <div class="icon novi-icon icon-lg mdi mdi-email text-primary" style="color: #0a4a7f;"></div>
+                    <ul class="list-0">
+                        <li style="cursor:default;">info@solomartel.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="layout-bordered-item wow-outer">
+                <div class="layout-bordered-item-inner wow slideInUp">
+                    <div class="icon novi-icon icon-lg mdi mdi-map-marker text-primary" style="color: #0a4a7f;"></div>
+                    <ul class="list-0">
+                        <li style="cursor:default;">30 N Gould street,Sheridan,WY</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="section novi-background bg-gray-100">
+    <div class="range justify-content-xl-center">
+        <div class="cell-xl-6 align-self-center container">
+            <div class="row">
+                <div class="col-lg-9 cell-inner">
+                    <div class="section-lg">
+                        <h3 class="text-uppercase wow-outer"><span class="wow slideInDown">Contact Us</span></h3>
+                        <!-- RD Mailform-->
+                        <form class="rd-form rd-mailform" data-form-output="form-output-global" data-form-type="contact" method="post">
+                              {% csrf_token %}
+                            <div class="row row-10">
+                                <div class="col-md-6 wow-outer">
+                                    <div class="form-wrap wow fadeSlideInUp">
+                                        <label class="form-label-outside" for="contact-first-name" >First Name</label>
+                                        <input class="form-input" id="contact-first-name" type="text" name="first_name"
+                                               data-constraints="@Required">
+                                    </div>
+                                </div>
+                                <div class="col-md-6 wow-outer">
+                                    <div class="form-wrap wow fadeSlideInUp">
+                                        <label class="form-label-outside" for="contact-last-name" >Last Name</label>
+                                        <input class="form-input" id="contact-last-name" type="text" name="last_name"
+                                               data-constraints="@Required">
+                                    </div>
+                                </div>
+                                <div class="col-12 wow-outer"  >
+                                    <div class="form-wrap wow fadeSlideInUp" >
+                                        <label class="form-label-outside" for="contact-email" >E-mail</label>
+                                        <input class="form-input" id="contact-email" type="email" name="email"
+                                               data-constraints="@Email @Required" >
+                                    </div>
+                                </div>
+                                
+                                <div class="col-12 wow-outer">
+                                    <div class="form-wrap wow fadeSlideInUp">
+                                        <label class="form-label-outside" for="contact-message" style="text-decoration:none;">Your Message</label>
+                                        <textarea class="form-input" id="contact-message" name="message"
+                                                  data-constraints="@Required"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="group group-middle">
+                                <div class="wow-outer">
+                                    <button class="button button-winona wow"
+                                            style="background-color: #0a4a7f; color: rgba(255, 255, 255);"
+                                            type="submit">Send Message
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+<!-- Page Footer-<a class="banner" href="https://www.templatemonster.com/intense-multipurpose-html-template.html"
+                      target="_blank"><img src="{% static 'images/intense_big_02.jpg' %}" alt=""/></a>-->
+{% endblock content %}

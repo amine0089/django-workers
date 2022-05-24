@@ -1,0 +1,289 @@
+{% load static %}
+<!DOCTYPE html>
+<html class="wide wow-animation body" lang="en">
+<head>
+    {% block title %}
+    <title>Home</title>
+    {% endblock title %}
+    {% block meta %}
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport"
+          content="width=device-width height=device-height initial-scale=1.0 maximum-scale=1.0 user-scalable=0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    {% endblock meta %}
+
+    {% block style %}
+    <link rel="icon" href="{% static 'images/favicon.png' %}" type="image/x-icon">
+    <!--    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Work+Sans:300,400,500,700,800%7CPoppins:300,400,700">-->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'css/fonts.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" id="main-styles-link">
+    <link rel="stylesheet" href="{% static 'css/style1.css' %}">
+    <link href="{% static 'css/intlTelInput1.css' %}" rel="stylesheet">
+
+
+
+    <style>
+                .ie-panel{display: none;background: #212121;padding: 10px 0;box-shadow: 3px 3px 5px 0 rgba(0,0,0,.3);clear: both;text-align:center;position: relative;z-index: 1;} html.ie-10 .ie-panel, html.lt-ie-10 .ie-panel {display: block;}
+                .body {max-width:100%;
+                height:100%;
+        overflow-x: hidden;
+        overflow-y: visible;
+        }
+        .load{
+            pointer-events:auto;
+        }
+
+    </style>
+    {% endblock %}
+
+    
+</head>
+<body >
+<div class="page">
+
+    {% block header %}
+    {% block nav %}
+    <header>
+    <nav class="rd-navbar rd-navbar-corporate" data-layout="rd-navbar-fixed" data-sm-layout="rd-navbar-fixed"
+                 data-md-layout="rd-navbar-fixed" data-md-device-layout="rd-navbar-fixed"
+                 data-lg-layout="rd-navbar-static" data-lg-device-layout="rd-navbar-static" data-lg-stick-up="true"
+                 data-lg-stick-up-offset="118px" data-xl-layout="rd-navbar-static"
+                 data-xl-device-layout="rd-navbar-static" data-xl-stick-up="true" data-xl-stick-up-offset="118px"
+                 data-xxl-layout="rd-navbar-static" data-xxl-device-layout="rd-navbar-static"
+                 data-xxl-stick-up-offset="118px" data-xxl-stick-up="true">
+                {% if user.is_authenticated %}
+                <div class="rd-navbar-aside-outer">
+                    <div class="rd-navbar-aside">
+                        <!-- RD Navbar Panel-->
+                        <div class="rd-navbar-panel" style="margin-bottom:-25px;margin-top:-27px">
+                            <!-- RD Navbar Toggle-->
+                            <button class="rd-navbar-toggle" data-rd-navbar-toggle="#rd-navbar-nav-wrap-1"><span></span>
+                            </button>
+                            <!-- RD Navbar Brand--><a class="rd-navbar-brand" href="{% url 'base:home' %}"><img
+                                src="{% static 'images/logo.png' %}" alt="" width="181" height="84"
+                                srcset="{% static 'images/logo.png' %} x2"/></a>
+                        </div>
+                        <div class="rd-navbar-collapse">
+                            <button class="rd-navbar-collapse-toggle rd-navbar-fixed-element-1"
+                                    data-rd-navbar-toggle="#rd-navbar-collapse-content-1"><span></span></button>
+                            <!--<div class="rd-navbar-collapse-content" id="rd-navbar-collapse-content-1">
+                                <p class="" href="{% url 'accounts:login' %}"
+                                   style="padding: 8px;">
+                                    {{ user.username }}
+                                </p>
+                                <a class="button button-gray-bordered button-winona"
+                                   href="{% url 'accounts:logout' %}"
+                                   style="padding: 8px; margin-left: 15px; margin-top: 0px">
+                                    Logout
+                                </a>
+                            </div>-->
+                        </div>
+                    </div>
+                </div>
+                {% else %}
+                <div class="rd-navbar-aside-outer" style="margin-bottom:-25px;margin-top:-27px">
+                    <div class="rd-navbar-aside">
+                        <!-- RD Navbar Panel-->
+                        <div class="rd-navbar-panel">
+                            <!-- RD Navbar Toggle-->
+                            <button class="rd-navbar-toggle" data-rd-navbar-toggle="#rd-navbar-nav-wrap-1"><span></span>
+                            </button>
+                            <!-- RD Navbar Brand--><a class="rd-navbar-brand" href="{% url 'base:home' %}"><img
+                                src="{% static 'images/logo.png' %}" alt="" width="181" height="84"
+                                srcset="{% static 'images/logo.png' %} x2"/></a>
+                        </div>
+                        <div class="rd-navbar-collapse">
+                            <button class="rd-navbar-collapse-toggle rd-navbar-fixed-element-1"
+                                    data-rd-navbar-toggle="#rd-navbar-collapse-content-1"><span></span></button>
+                            <div class="rd-navbar-collapse-content" id="rd-navbar-collapse-content-1">
+                                <a class="button button-gray-bordered button-winona" href="{% url 'accounts:login' %}"
+                                   style="padding: 8px;">
+                                    Sign in
+                                </a>
+                                <a class="button button-gray-bordered button-winona"
+                                   href="{% url 'accounts:register' %}"
+                                   style="padding: 8px; margin-left: 15px; margin-top: 0px">
+                                    Register
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+
+                <div class="rd-navbar-main-outer" style="position: inherit;">
+                    <div class="rd-navbar-main">
+                        <div class="rd-navbar-nav-wrap" id="rd-navbar-nav-wrap-1">
+                            <!-- RD Navbar Nav-->
+                            <ul class="rd-navbar-nav d-flex align-items-center">
+                                {% block active_tab %}
+                                {% endblock active_tab %}
+                                
+                                {% if user.is_authenticated %}
+	<li class="rd-nav-item dropdown ml-auto " >
+	<div id="dd" class="wrapper-dropdown-3" >
+	<span>{{ user.username }}</span>
+	<ul class="dropdown">
+		<li><a href="{% url 'accounts:user_profile' %}" alt="{% url 'accounts:user_profile' %}"><i class="fas fa-user-circle fa-fw"></i>Profile</a></li>
+		<li><a href="{% url 'base:my_investments' %}"><i class="fa fa-money"></i>My Investments</a></li>
+		<li><a href="{% url 'base:my_transactions' %}"><i class="fa fa-exchange"></i>My Transactions</a></li>
+        <li><a href="{% url 'accounts:logout' %}"><i class="fa fa-sign-out"></i>Logout</a></li>
+	</ul>
+	</div>
+	</li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </nav>
+        </header>
+    {% endblock nav%}
+    {% endblock header %}
+  
+    
+
+    {% block content %}
+    {% endblock content %}
+
+    {% block footer %}
+    <footer class="section novi-background footer-advanced bg-gray-700">
+        
+        <div class="footer-advanced-aside">
+            <div class="container">
+                <div class="footer-advanced-layout" >
+                    <div>
+                        <ul class="list-nav">
+                            <li><a href="{% url 'base:home' %}">Home</a></li>
+                            <li><a href="{% url 'base:investments' %}">Investments</a></li>
+                            <li><a href="{% url 'base:faq' %}">FAQ</a></li>
+                            <li><a href="{% url 'base:contacts' %}">Contact</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <ul class="foter-social-links list-inline list-inline-md">
+                            <li><a class="icon novi-icon icon-sm link-default mdi mdi-facebook" href="#"></a></li>
+                            <li><a class="icon novi-icon icon-sm link-default mdi mdi-twitter" href="#"></a></li>
+                            <li><a class="icon novi-icon icon-sm link-default mdi mdi-instagram" href="#"></a></li>
+                            <li><a class="icon novi-icon icon-sm link-default mdi mdi-youtube-play" href="#"></a></li>
+                            <li><a class="icon novi-icon icon-sm link-default mdi mdi-linkedin" href="#"></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container" style="margin-top:-20px">
+            <hr/>
+        </div>
+       
+            <div class="container" style="margin-top:-20px">
+                <div class="footer-advanced-layout" style="padding:0px"><a class="brand" href="{% url 'base:home' %}"><img
+                        src="{% static 'images/logo.png' %}" alt="" width="" height="80"
+                        srcset="images/logo-light-115x34.png 2x"/></a>
+                    <!-- Rights-->
+                    <p class="rights"><span>&copy;&nbsp;</span><span class="copyright-year"></span>. All Rights
+                        Reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    {% endblock footer %}
+    
+
+
+
+{% block scripts %}
+     
+
+    <script src="{% static 'js/core.min.js' %}"></script>
+    <script src="{% static 'js/script.js' %}"></script>
+    <script src="{% static 'js/profile.js' %}"></script>
+    <script src="{% static 'js/invest_Form.js' %}"></script>
+    <script src="{% static 'js/credit_card.js' %}"></script>
+    <script src="{% static 'js/invest_mail.js' %}"></script>
+    <script src="{% static 'js/direct_bank.js' %}"></script>
+    <script src="{% static 'js/register.js' %}"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+    <script type="text/javascript">
+			
+			function DropDown(el) {
+				this.dd = el;
+				this.placeholder = this.dd.children('span');
+				this.opts = this.dd.find('ul.dropdown > li');
+				this.val = '';
+				this.index = -1;
+				this.initEvents();
+			}
+			DropDown.prototype = {
+				initEvents : function() {
+					var obj = this;
+
+					obj.dd.on('click', function(event){
+						$(this).toggleClass('active');
+						return false;
+					});
+
+					obj.opts.on('click',function(){
+						var opt = $(this);
+						obj.val = opt.text();
+						obj.index = opt.index();
+						obj.placeholder.text(obj.val);
+					});
+				},
+				getValue : function() {
+					return this.val;
+				},
+				getIndex : function() {
+					return this.index;
+				}
+			}
+
+			$(function() {
+
+				var dd = new DropDown( $('#dd') );
+
+				$(document).click(function() {
+					// all dropdowns
+					$('.wrapper-dropdown-3').removeClass('active');
+				});
+
+			});
+
+		</script>
+        <script type="text/javascript" src="{% static 'js/intlTelInput.js' %}"></script>
+        <script type="text/javascript">
+    var input = document.querySelector("#phone");
+    window.intlTelInput(input, {
+      allowDropdown: true,
+      // autoHideDialCode: false,
+       autoPlaceholder: "off",
+      // dropdownContainer: document.body,
+      // excludeCountries: ["us"],
+      // formatOnDisplay: false,
+      // geoIpLookup: function(callback) {
+      //   $.get("http://ipinfo.io", function() {}, "jsonp").always(function(resp) {
+      //     var countryCode = (resp && resp.country) ? resp.country : "";
+      //     callback(countryCode);
+      //   });
+      // },
+      // hiddenInput: "full_number",
+      // initialCountry: "auto",
+      // localizedCountries: { 'de': 'Deutschland' },
+       nationalMode: false,
+      // onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
+      // placeholderNumberType: "MOBILE",
+      // preferredCountries: ['cn', 'jp'],
+      // separateDialCode: true,
+      utilsScript: src= "{% static 'js/utils.js' %}",
+    });
+  </script>
+
+{% endblock scripts %}
+</div>
+</body>
+</html>

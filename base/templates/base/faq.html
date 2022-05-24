@@ -1,0 +1,247 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block title %}
+<title>FAQ - SolomartelHoldings</title>
+{% endblock title %}
+
+
+{% block active_tab %}
+                                <li class="rd-nav-item ">
+                                    <a class="rd-nav-link" href="{% url 'base:home' %}">Home</a>
+                                </li>
+                                <li class="rd-nav-item">
+                                    <a class="rd-nav-link" href="{% url 'base:investments' %}">
+                                        Investments
+                                    </a>
+                                </li>
+                                
+                                <li class="rd-nav-item active">
+                                    <a class="rd-nav-link " href="{% url 'base:faq' %}">
+                                        FAQ
+                                    </a>
+                                </li>
+                                <li class="rd-nav-item"><a class="rd-nav-link"
+                                                           href="{% url 'base:contacts' %}">Contact</a>
+                                </li>
+{% endblock active_tab %}
+
+{% block content %}
+<div class="preloader">
+    <div class="preloader-logo"><img src="{% static 'images/logo.png' %}" alt="" width="201px" height="94px"
+                                     srcset="{% static 'images/logo.png' %} 2x"/>
+    </div>
+    <div class="preloader-body">
+        <div id="loadingProgressG">
+            <div class="loadingProgressG" id="loadingProgressG_1"></div>
+        </div>
+    </div>
+</div>
+<!-- How it works section -->
+<section class="section novi-background section-md text-left" style="padding-top: 80px;">
+    <div class="container ml-5 pl-2 mt-4">
+        <h3 class="text-uppercase font-weight-bold wow-outer">
+            <span class="wow slideInDown mb-5">Frequently Asked Questions</span>
+        </h3>
+
+        <div class="row mt-5 pt-5" >
+            <div class="col-lg-10 col-xl-12">
+                <div class="row row-30 flex-column justify-content-center align-items-justify">
+                    <div class="p-2">
+                        <h5 class="mt-2 font-weight-bold mb-0">
+                        <button class="btn btn-link" id="faq_1" type="button" data-toggle="collapse" data-target="#collapse_1" aria-expanded="true" aria-controls="collapse_1">How to get started investing with Solomartel ?</h5>
+                    </div>
+                    <div id ="collapse_1" class="collapse p-2">
+                        <p class="text-justify">In order to get started investing with Solomartel,you must simply click
+                            on the sign
+                            in/register
+                            button followed by the small register button. Then fill your information in and you will be
+                            able to start investing in any of our funds that are currently open. The banking information
+                            needs to be provided for Solomartel to distribute returns, fees cannot be charged based on
+                            that information and your account creation is totally free.
+                            It is really as simply as that to get started</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-lg-10 col-xl-12">
+                <div class="row row-30 flex-column justify-content-center align-items-justify">
+                    <div class="p-2">
+                        <h5 class="mt-2 font-weight-bold mb-0">
+                        <button class="btn btn-link" id="faq_2" type="button" data-toggle="collapse" data-target="#collapse_2" aria-expanded="true" aria-controls="collapse_1">
+                        CAN I INVEST IN SOLOMARTEL FROM MY COUNTRY/STATE/REGION/ABROAD ?</h5>
+                    </div>
+                    <div id ="collapse_2" class="collapse p-2">
+                        <p class="text-justify">
+                        You can invest in Solomartel funds from anywhere in the world either as yourself or as a legally registered entity.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-lg-10 col-xl-12">
+                <div class="row row-30 flex-column justify-content-center align-items-justify">
+                    <div class="p-2">
+                        <h5 class="mt-2 font-weight-bold mb-0">
+                        <button class="btn btn-link" id="faq_3" type="button" data-toggle="collapse" data-target="#collapse_3" aria-expanded="true" aria-controls="collapse_3">
+                        CAN I INVEST WITH MY RETIREMENT PLAN/ IRA/ 401K/ K-1 ?</h5>
+                    </div>
+                    <div id ="collapse_3" class="collapse p-2">
+                        <p class="text-justify">"Solomartel allows its customers to invest their retirement funds, to do so, when registering
+an account, one needs to choose investing with a legal entity>retirement plan. Make sure to
+specify the type of retirement plan that you wish to open in the additional notes section at
+the very bottom of the registration form.Once that has been done,we will reach you via email
+shortly after.
+If you do not know what kind of retirement fund you wish to open or need more information,
+we recommend that you book a call with us or contact us via in written form using the contact
+section of our website. We will offer you tailored assistance and information about the
+retirement plans that are available for you to open in your country/jurisdiction."
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-lg-10 col-xl-12">
+                <div class="row row-30 flex-column justify-content-center align-items-justify">
+                    <div class="p-2">
+                        <h5 class="mt-2 font-weight-bold mb-0">
+                        <button class="btn btn-link" id="faq_4" type="button" data-toggle="collapse" data-target="#collapse_4" aria-expanded="true" aria-controls="collapse_1">
+                        HOW WILL MY RETURNS BE DISTRIBUTED ?</h5>
+                    </div>
+                    <div id ="collapse_4" class="collapse p-2">
+                        <p class="text-justify">
+                        The returns will be sent to the banking coordinates that you provided us upon opening your account, you can always modify them in the profile section of your account or contact us for any special requests.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-10 col-xl-12">
+                <div class="row row-30 flex-column justify-content-center align-items-justify">
+                    <div class="p-2">
+                        <h5 class="mt-2 font-weight-bold mb-0">
+                        <button class="btn btn-link" id="faq_5" type="button" data-toggle="collapse" data-target="#collapse_5" aria-expanded="true" aria-controls="collapse_1">
+                        WHAT ARE THE ADVANTAGES OF SOLOMARTEL FUNDS OVER REITS ( REAL ESTATE INVESTMENT TRUSTS) ?</h5>
+                    </div>
+                    <div id ="collapse_5" class="collapse p-2">
+                        <p class="text-justify">REITs are paper assets not backed by anything with the except the promises made on it. It is a liquid hybrid paper investment that does not provide the stability of an actual investment real estate and its price fluctuates all the time.
+                                                With Solomartel, you own actual assets and your investments are backed by actual properties and alongside that, you get all of the advantages that a real estate investor would get including many tax benefits.
+                                                Solomartel allows anyone from anywhere in the world to invest in real estate projects all over the globe without needing to know the details of the field or having important cash reserves.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-10 col-xl-12">
+                <div class="row row-30 flex-column justify-content-center align-items-justify">
+                    <div class="p-2">
+                        <h5 class="mt-2 font-weight-bold mb-0">
+                        <button class="btn btn-link" id="faq_6" type="button" data-toggle="collapse" data-target="#collapse_6" aria-expanded="true" aria-controls="collapse_1">
+                        WHY IS THE FUND VALUE ALWAYS HIGHER THAN THE FUND AMOUNT ?</h5>
+                    </div>
+                    <div id ="collapse_6" class="collapse p-2">
+                        <p class="text-justify">All of our properties have a safety margin and can always be resold at a high profit. This is because we negotiate deals low and the amount invested is always lower than the actual value of the property reducing the risk of the investor to 0.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-10 col-xl-12">
+                <div class="row row-30 flex-column justify-content-center align-items-justify">
+                    <div class="p-2">
+                        <h5 class="mt-2 font-weight-bold mb-0">
+                        <button class="btn btn-link" id="faq_7" type="button" data-toggle="collapse" data-target="#collapse_7" aria-expanded="true" aria-controls="collapse_1">
+                        WHAT IS THE NET INVESTOR YEARLY ROI ?</h5>
+                    </div>
+                    <div id ="collapse_7" class="collapse p-2">
+                        <p class="text-justify">
+                        This is the net amount that the investor will earn on their investment from investing in a given fund. If the value for a given fund is 10%, the investor will earn 100$ yearly on every 1000$ invested in the project. These returns do not include the appreciation which is anywhere from 2 to 6% depending on the fund and year</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-10 col-xl-12">
+                <div class="row row-30 flex-column justify-content-center align-items-justify">
+                    <div class="p-2">
+                        <h5 class="mt-2 font-weight-bold mb-0">
+                        <button class="btn btn-link" id="faq_8" type="button" data-toggle="collapse" data-target="#collapse_8" aria-expanded="true" aria-controls="collapse_1">
+                        HOW MUCH IS THE APPRECIATION ON SOLOMARTEL INVESTMENTS ?</h5>
+                    </div>
+                    <div id ="collapse_8" class="collapse p-2">
+                        <p class="text-justify">The appreciation on the properties is anywhere from 2 to 6 % yearly depending on the fund and year.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-10 col-xl-12">
+                <div class="row row-30 flex-column justify-content-center align-items-justify">
+                    <div class="p-2">
+                        <h5 class="mt-2 font-weight-bold mb-0">
+                        <button class="btn btn-link" id="faq_9" type="button" data-toggle="collapse" data-target="#collapse_9" aria-expanded="true" aria-controls="collapse_1">
+                        WHY ARE SOLOMARTEL FUNDS CONSIDERED SAFE/LOW RISK INVESTMENTS ?</h5>
+                    </div>
+                    <div id ="collapse_9" class="collapse p-2">
+                        <p class="text-justify">Because of the way Solomartel manages risk:
+
+Firstly, all Solomartel properties are located in markets that have a stable and already diversified economy that is reliant on various industries that cannot be outsourced yet an economy that is also emerging and will grow in the years to come.
+
+Secondly,even despite that and considering the worst case scenario,all Solomartel properties have a safety margin. This is because we always negotiate and purchase our deals below market value and the amount invested is always lower than the actual value of the properties reducing the risk of the investor to nearly 0 as the properties can always be resold at a profit
+</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-10 col-xl-12">
+                <div class="row row-30 flex-column justify-content-center align-items-justify">
+                    <div class="p-2">
+                        <h5 class="mt-2 font-weight-bold mb-0">
+                        <button class="btn btn-link" id="faq_10" type="button" data-toggle="collapse" data-target="#collapse_10" aria-expanded="true" aria-controls="collapse_1">
+                        HOW LONG IS THE TERM OF THE FUND/ WHAT IF I DECIDE TO SELL ?</h5>
+                    </div>
+                    <div id ="collapse_10" class="collapse p-2">
+                        <p class="text-justify">The idea behind investing in Solomartel is to invest for the long term and benefit from the Cashflow, the returns being some of the highest available in the marketplace and most likely the highest considering the unmatched stability that our investments provide.
+
+The long term mentality does not apply solely to investing into Solomartel but investing in real estate as we are dealing with buildings after all. Real estate funds are designed to be long term, the shorter the term of a real estate fund,the lower the returns are on average.
+
+This is why if you decide to invest in REITs (Real estate investment trusts) such as the ones on Wallstreet, the returns are literally peanuts while the risk that the investor takes is enormous. Moreover, REITs are not really real estate investment funds, they are liquid hybrid paper inestments that do not provide the stability of an actual investment piece of real estate and most of them generate a significant amount of revenue from fees which is another stimulant for them to keep the terms short.
+
+The investments that Solomartel provides are designed to allow individuals and companies to earn passive income and for the investments to “re-pay” themselves, they are not designed for speculation.
+However,if for urgent reasons, one of our clients wish to sell their investment, Solomartel can help its customers sell their investments upon demand from our customers as we always have customers wishing to invest in already closed funds.
+</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+                            <br><br>
+                            <strong>If you did not find the answer to your question,feel free to contact us via the
+                                contact
+                                information provided in your account or if not registered yet, by using the <a href="{% url 'base:contacts' %}">contact page</a>
+                                of
+                                our platform.
+                            </strong>
+                            <br><br>
+                            <strong> We respect the privacy of the participants in our funds. </strong>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- Global Mailform Output-->
+<div class="snackbars" id="form-output-global"></div>
+{% endblock content %}

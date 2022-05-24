@@ -1,0 +1,160 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block title %}
+<title> Investments - SolomartelHoldings </title>
+{% endblock title %}
+
+<style>
+
+    body {
+        font-family: Ubuntu Condensed;
+    }
+
+
+</style>
+
+
+{% block active_tab %}
+                                <li class="rd-nav-item ">
+                                    <a class="rd-nav-link" href="{% url 'base:home' %}">Home</a>
+                                </li>
+                                <li class="rd-nav-item active">
+                                    <a class="rd-nav-link" href="{% url 'base:investments' %}">
+                                        Investments
+                                    </a>
+                                </li>
+                                
+                                <li class="rd-nav-item">
+                                    <a class="rd-nav-link" href="{% url 'base:faq' %}">
+                                        FAQ
+                                    </a>
+                                </li>
+                                <li class="rd-nav-item"><a class="rd-nav-link"
+                                                           href="{% url 'base:contacts' %}">Contact</a>
+                                </li>
+{% endblock active_tab %}
+
+{% block content %}
+<div class="preloader">
+    <div class="preloader-logo"><img src="{% static 'images/logo.png' %}" alt="" width="201px" height="94px"
+                                     srcset="{% static 'images/logo.png' %} 2x"/>
+    </div>
+    <div class="preloader-body">
+        <div id="loadingProgressG">
+            <div class="loadingProgressG" id="loadingProgressG_1"></div>
+        </div>
+    </div>
+</div>
+<!-- Start of Available Investments-->
+
+<section class="section novi-background" style="padding-top: 40px;">
+<h4 class="pb-3 mb-2 ml-3 title">Available investments</h4>
+        {% if msg1  %}
+        <h4 class="alert-info mb-5 mt-5"> {{msg1}}</h4> 
+        {% endif %}
+    <div class="mx-3">
+        {% if messages %}
+        <ul class="msg_error_class">
+            {% for message in messages %}
+            {% if 'error' in message.tags %}
+            <div class="alert alert-warning alert-dismissible fade show" role="alert"
+                 style="background-color: #f8d7da;">
+                <strong>{{ message }}</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </ul>
+        {% endif %}
+        <div class="row justify-content-center align-items-center">
+        {% if msg1  %}
+        <div> {{msg1}}</div> 
+        {% endif %}
+        {% if investments %}
+            {% for investment in investments %}
+            <div class="card col-10 col-sm-6 col-md-4 col-lg-4 col-xl-4 my-3" style="width: 18rem;">
+                <img style="height: 300px;" class="card-img-top" src="{{ investment.my_images.all.0.image.url }}"
+                     alt="Card image cap">
+                <div class="card-body border">
+                    <h5 class="card-title font-weight-bold text-center mb-5">{{ investment.name }}</h5>
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <strong>Minimum investments: </strong><span>{{ investment.minimum_investment }}$</span>
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Gross yearly ROI: </strong><span>{{ investment.gross_returns }}%</span>
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Net yearly returns: </strong> <span>{{ investment.net_returns }}%</span>
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Total fund investment
+                                amount: </strong><span>{{ investment.invested_amount }}$</span>
+                        </li>
+                        <li class="list-group-item"
+                            style="border-bottom-left-radius: 0px; border-bottom-right-radius: 0px;">
+                            <strong>Property market value: </strong><span>{{ investment.market_value }}$</span>
+                        </li>
+                    </ul>
+                    <a href="{% url 'base:investment' investment.name %}" class="btn btn-block text-white"
+                       style="background-color: #0a4a7f; border-top-left-radius: 0px; border-top-right-radius: 0px;">Details</a>
+                </div>
+            </div>
+            {% endfor %}
+            {% else %}
+                <div class="container-fluid flex-column mt-5 pt-5" style="margin-bottom:48px; padding-bottom:48px;">
+        <div class="d-flex text-center pt-5 mt-5">
+                <div class="col-md-12 alert alert-success" id="msg">
+                    <h3>No offerings are avaiable at the current moment.</h3>       
+            </div>
+        </div>
+    </div>
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+<!-- Start of Past Projects-->
+{% if not msg2 %}
+<section class="section novi-background" style="padding-top: 80px;">
+<h4 class="pb-3 mb-2 ml-3 title">Past Projects</h4>
+    <div class="mx-3">
+        <div class="row justify-content-center align-items-center">
+            {% for investment in pastprojects %}
+            <div class="card col-10 col-sm-6 col-md-4 col-lg-4 col-xl-4 my-3" style="width: 18rem;">
+                <img style="height: 300px;" class="card-img-top" src="{{ investment.my_images.all.0.image.url }}"
+                     alt="Card image cap">
+                <div class="card-body border">
+                    <h5 class="card-title font-weight-bold text-center mb-5">{{ investment.name }}</h5>
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <strong>Minimum investments: </strong><span>{{ investment.minimum_investment }}$</span>
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Gross yearly ROI: </strong><span>{{ investment.gross_returns }}%</span>
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Net yearly returns: </strong> <span>{{ investment.net_returns }}%</span>
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Total fund investment
+                                amount: </strong><span>{{ investment.invested_amount }}$</span>
+                        </li>
+                        <li class="list-group-item"
+                            style="border-bottom-left-radius: 0px; border-bottom-right-radius: 0px;">
+                            <strong>Property market value: </strong><span>{{ investment.market_value }}$</span>
+                        </li>
+                    </ul>
+                    <a href="{% url 'base:past_project' investment.name %}" class="btn btn-block text-white"
+                       style="background-color: #0a4a7f; border-top-left-radius: 0px; border-top-right-radius: 0px;">Details</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif%}
+{% endblock content %}

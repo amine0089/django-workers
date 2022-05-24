@@ -1,0 +1,126 @@
+{% extends 'accounts/base/base.html' %}
+{% load static %}
+{% block title %}
+<title>Login | Solomartel</title>
+{% endblock %}
+
+{% block body_color %}
+#353578 !important;
+{% endblock body_color %}
+
+{% block styles_page %}
+<link rel="icon" href="{% static 'images/favicon.png' %}" type="image/x-icon">
+<style>
+.widget
+{
+    width: 70%;
+    margin: auto;
+}
+
+  label::after {
+    content: "*";
+    color: red;
+  }
+ .checkbox:after{
+  content: none;
+  }
+.g_st.without-after-element:after {
+    content: none;
+
+  }
+  .form-control.has-error {
+    border: 1px solid #FB404B !important;
+    color: #FB404B !important;
+}
+
+.form-control.has-success {
+    border: 1px solid #28a745 !important;
+    color: #28a745 !important;
+
+}
+.error-msg {
+    color: red;
+    font-size: 13px;
+    margin: 3px;
+}
+
+
+</style>
+{% endblock styles_page %}
+
+{% block content %}
+<div class="widget-content ">
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        {% if 'success' in message.tags %}
+        <li>
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        </li>
+        {% endif %}
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% if messages %}
+    <ul class="msg_error_class">
+        {% for message in messages %}
+        {% if 'error' in message.tags %}
+        <li>
+            <div class="alert alert-danger">
+                {{ message }}
+            </div>
+        </li>
+        {% endif %}
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% if msg %}
+    <div class="alert alert-danger" id="msg">{{msg}}</div>
+    {% endif %}
+    <form method="POST" action="{% url 'accounts:login' %}" id="login_submit">
+        {% csrf_token %}
+
+        <div id="form_div">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label class="control-label col-sm-12" for="user_name_login">Username or Email Address</label>
+                        <div class="col-sm-12">
+                            <input type="text" class="form-control" minlength="3"
+                                   maxlength="60" id="user_name_login"
+                                   placeholder="Username or Email Address" name="username"
+                                   onkeyup="Email_check_login()">
+                            <span class="error-msg"
+                                  id="email_label_edit_login"></span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-12" for="password">Password</label>
+                <div class="col-sm-12">
+                    <input type="password" class="form-control" id="password" placeholder="Password"
+                           name="password" onkeyup="Password_login()">
+                    <span class="error-msg" id="password_label"></span>
+                </div>
+            </div>
+
+
+            <div class="row mt-5 justify-content-center">
+                <button style="background-color: #353578;border-color:#353578;" type="submit"
+                        class="col-md-10 btn btn-success">Login
+                </button>
+            </div>
+        </div>
+        <br>
+        <a href="{% url 'accounts:register' %}">Register</a> |
+        <a href="{% url 'accounts:forgot_password' %}">Lost your password?</a>
+    </form>
+</div>
+{% endblock content %}
+{% block scripts_page %}
+<script src="{% static 'js/login.js' %}"></script>
+{% endblock scripts_page %}

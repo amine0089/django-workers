@@ -1,0 +1,212 @@
+{% extends 'base.html' %}
+
+{% load static %}
+<!DOCTYPE html>
+<html class="wide wow-animation" lang="en">
+  <head>
+    {% block title %}
+    <title>FAQ - Solomartel</title>
+    {% endblock title %}
+    {% block content %}
+
+
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width height=device-height initial-scale=1.0 maximum-scale=1.0 user-scalable=0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <link rel="icon" href="{% static 'images/new_favicon.png' %}" type="image/x-icon">
+<!--    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Work+Sans:300,400,500,700,800%7CPoppins:300,400,700">-->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'css/fonts.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" id="main-styles-link">
+    <style>.ie-panel{display: none;background: #212121;padding: 10px 0;box-shadow: 3px 3px 5px 0 rgba(0,0,0,.3);clear: both;text-align:center;position: relative;z-index: 1;} html.ie-10 .ie-panel, html.lt-ie-10 .ie-panel {display: block;}</style>
+  </head>
+  <body>
+    <div class="ie-panel"><a href="http://windows.microsoft.com/en-US/internet-explorer/"><img src="{% static 'images/ie8-panel/warning_bar_0000_us.jpg' %}" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today."></a></div>
+    <div class="preloader">
+      <div class="preloader-logo"><img src="{% static 'images/logo-default-151x44.png' %}" alt="" width="151" height="44" srcset="{% static 'images/logo-default-151x44.png' %} 2x"/>
+      </div>
+      <div class="preloader-body">
+        <div id="loadingProgressG">
+          <div class="loadingProgressG" id="loadingProgressG_1"></div>
+        </div>
+      </div>
+    </div>
+    <div class="page">
+      <!-- Page Header-->
+   
+      <!-- Breadcrumbs -->
+        <div class="breadcrumbs-custom-inner">
+
+          {% for one_investoment in all_investments %}
+          <div class="col-md-10 col-lg-6 col-xl-4">
+            <div class="table-cell">
+            <div class="figure-block">
+                <figure class="item-thumb">
+                    <a class="hover-effect" href="https://solomartelholdings.com/property/braddock-triplex/">
+                        <img width="420" height="262" src="https://solomartelholdings.com/wp-content/uploads/2019/12/Untitled-2-343x258.png" class="attachment-houzez-property-thumb-image size-houzez-property-thumb-image wp-post-image" alt="">                    </a>
+                    
+                </figure>
+            </div>
+        </div>
+              <h2 class="property-title"><a href="https://solomartelholdings.com/property/braddock-triplex/">{{one_investoment.name}}</a></h2>
+              <p class="about-subtitle" style="width: 90%">Minimum investment: {{one_investoment.minimum_investment}}</p>
+
+              <p class="about-subtitle" style="width: 90%">Gross yearly ROI: {{one_investoment.gross_returns}}</p>
+
+              <p class="about-subtitle" style="width: 90%">Net yearly returns: {{one_investoment.net_returns}}</p>
+
+              <p class="about-subtitle" style="width: 90%">Total fund investment amount: {{one_investoment.invested_amount}}</p>
+
+              <p class="about-subtitle" style="width: 90%">Property market value: {{one_investoment.market_value}}</p>
+
+             <a class="button button-lg button-primary button-winona" href="/view_investoment/?id={{one_investoment.id}}">View properties</a>
+            </div>
+            {% endfor %}
+
+          <div class="container breadcrumbs-custom-container">
+            
+            
+          </div>
+        </div>
+      <!-- Working at CaseCraft-->
+      <section class="section novi-background section-lg">
+        <div class="container">
+          <div class="row row-50 justify-content-center justify-content-lg-between flex-lg-row-reverse">
+            <div class="col-md-10 col-lg-6 col-xl-5">
+              <h3 class="text-uppercase">Who We Are</h3>
+              <p class="about-subtitle">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostru eiusmod tempor incididunt ut labore et.</p><a class="button button-lg button-primary button-winona" href="about-us.html">View properties</a>
+            </div>
+            <div class="col-md-10 col-lg-6 col-xl-6"><img class="img-responsive" src="{% static 'images/careers-1-570x388.jpg' %}" alt="" width="570" height="388"/>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Advantages and Achievements-->
+      <section class="section novi-background section-md text-center bg-gray-100">
+        <div class="container">
+          <h3 class="text-uppercase wow-outer"><span class="wow slideInUp">Why people Choose Us</span></h3>
+          <p class="wow-outer"><span class="text-width-1 wow slideInDown">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</span></p>
+          <div class="row row-50">
+            <div class="col-6 col-md-3 wow-outer">
+              <!-- Counter Minimal-->
+              <article class="counter-minimal wow slideInUp" data-wow-delay=".1s">
+                <div class="counter-minimal-icon box-chloe__icon novi-icon linearicons-users2"></div>
+                <div class="counter-minimal-main">
+                  <div class="counter">12</div>
+                </div>
+                <h5 class="counter-minimal-title">National Partners</h5>
+              </article>
+            </div>
+            <div class="col-6 col-md-3 wow-outer">
+              <!-- Counter Minimal-->
+              <article class="counter-minimal wow slideInUp" data-wow-delay=".1s">
+                <div class="counter-minimal-icon box-chloe__icon novi-icon linearicons-home-icon3"></div>
+                <div class="counter-minimal-main">
+                  <div class="counter">238</div>
+                </div>
+                <h5 class="counter-minimal-title">Properties</h5>
+              </article>
+            </div>
+            <div class="col-6 col-md-3 wow-outer">
+              <!-- Counter Minimal-->
+              <article class="counter-minimal wow slideInUp" data-wow-delay=".1s">
+                <div class="counter-minimal-icon box-chloe__icon novi-icon linearicons-star"></div>
+                <div class="counter-minimal-main">
+                  <div class="counter">19</div>
+                </div>
+                <h5 class="counter-minimal-title">Years of Experience</h5>
+              </article>
+            </div>
+            <div class="col-6 col-md-3 wow-outer">
+              <!-- Counter Minimal-->
+              <article class="counter-minimal wow slideInUp" data-wow-delay=".1s">
+                <div class="counter-minimal-icon box-chloe__icon novi-icon linearicons-apartment"></div>
+                <div class="counter-minimal-main">
+                  <div class="counter">54</div>
+                </div>
+                <h5 class="counter-minimal-title">Qualified Brokers</h5>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="section novi-background section-lg text-center">
+        <div class="container">
+          <h3 class="text-uppercase wow-outer"><span class="wow slideInUp">Our Team</span></h3>
+          <div class="row row-50 row-xxl-70 justify-content-center justify-content-lg-start">
+            <div class="col-md-10 col-lg-6 wow-outer">
+              <!-- Profile Creative-->
+              <article class="profile-creative wow slideInLeft">
+                <figure class="profile-creative-figure"><img class="profile-creative-image" src="{% static 'images/team-1-270x273.jpg' %]" alt="" width="270" height="273"/>
+                </figure>
+                <div class="profile-creative-main">
+                  <h5 class="profile-creative-title"><a href="#">Nathalie Porter</a></h5>
+                  <p class="profile-creative-position">Founder, Broker</p>
+                  <div class="profile-creative-contacts">
+                    <div class="object-inline"><span class="icon novi-icon icon-md mdi mdi-phone"></span><a href="tel:#">1-800-1324-567</a></div>
+                  </div>
+                  <p>Ms. Porter founded our company in 1989 with a vision to help guests and residents of the USA to easily find and buy or rent real estate in all 50 states.</p>
+                </div>
+              </article>
+            </div>
+            <div class="col-md-10 col-lg-6 wow-outer">
+              <!-- Profile Creative-->
+              <article class="profile-creative wow slideInLeft" data-wow-delay=".2s">
+                <figure class="profile-creative-figure"><img class="profile-creative-image" src="images/team-2-270x273.jpg" alt="" width="270" height="273"/>
+                </figure>
+                <div class="profile-creative-main">
+                  <h5 class="profile-creative-title"><a href="#">John Thompson</a></h5>
+                  <p class="profile-creative-position">Sales Associate</p>
+                  <div class="profile-creative-contacts">
+                    <div class="object-inline"><span class="icon novi-icon icon-md mdi mdi-phone"></span><a href="tel:#">1-800-1324-567</a></div>
+                  </div>
+                  <p>John has been in sales and marketing for the past 15 years. He has excellent knowledge about the local market both residential and commercial.</p>
+                </div>
+              </article>
+            </div>
+            <div class="col-md-10 col-lg-6 wow-outer">
+              <!-- Profile Creative-->
+              <article class="profile-creative wow slideInLeft">
+                <figure class="profile-creative-figure"><img class="profile-creative-image" src="{% static 'images/team-3-270x273.jpg' %}" alt="" width="270" height="273"/>
+                </figure>
+                <div class="profile-creative-main">
+                  <h5 class="profile-creative-title"><a href="#">Brian Payne</a></h5>
+                  <p class="profile-creative-position">Realtor</p>
+                  <div class="profile-creative-contacts">
+                    <div class="object-inline"><span class="icon novi-icon icon-md mdi mdi-phone"></span><a href="tel:#">1-800-1324-567</a></div>
+                  </div>
+                  <p>Brian is not only a Licensed Realtor but also holds the Title Producers and Mortgage Licenses, which makes him a very knowledgeable real estate expert.</p>
+                </div>
+              </article>
+            </div>
+            <div class="col-md-10 col-lg-6 wow-outer">
+              <!-- Profile Creative-->
+              <article class="profile-creative wow slideInLeft" data-wow-delay=".2s">
+                <figure class="profile-creative-figure"><img class="profile-creative-image" src="{% static 'images/team-4-270x273.jpg' %}" alt="" width="270" height="273"/>
+                </figure>
+                <div class="profile-creative-main">
+                  <h5 class="profile-creative-title"><a href="#">Marie Fernandez</a></h5>
+                  <p class="profile-creative-position">Broker</p>
+                  <div class="profile-creative-contacts">
+                    <div class="object-inline"><span class="icon novi-icon icon-md mdi mdi-phone"></span><a href="tel:#">1-800-1324-567</a></div>
+                  </div>
+                  <p>Marie’s goal is to provide clients with the highest level of marketing expertise and customer service to help them reach their uppermost real estate goals.</p>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Page Footer-->
+         
+    </div>
+    <!-- Global Mailform Output-->
+    <div class="snackbars" id="form-output-global"></div>
+    <!-- Javascript-->
+    <script src="{% static 'js/core.min.js' %}"></script>
+    <script src="{% static 'js/script.js' %}"></script>
+  </body>
+</html>
+{% endblock content %}

@@ -1,0 +1,59 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block title %}
+<title>Transactions - Solomartel </title>
+{% endblock title %}
+
+
+{% block active_tab %}
+                                <li class="rd-nav-item ">
+                                    <a class="rd-nav-link" href="{% url 'base:home' %}">Home</a>
+                                </li>
+                                <li class="rd-nav-item ">
+                                    <a class="rd-nav-link" href="{% url 'base:investments' %}">
+                                        Investments
+                                    </a>
+                                </li>
+                                
+                                <li class="rd-nav-item">
+                                    <a class="rd-nav-link" href="{% url 'base:faq' %}">
+                                        FAQ
+                                    </a>
+                                </li>
+                                <li class="rd-nav-item"><a class="rd-nav-link"
+                                                           href="{% url 'base:contacts' %}">Contact</a>
+                                </li>
+{% endblock active_tab %}
+
+{% block content %}
+
+<div class="preloader">
+    <div class="preloader-logo"><img src="{% static 'images/logo.png' %}" alt="" width="201px" height="94px"
+                                     srcset="{% static 'images/logo.png' %} 2x"/>
+    </div>
+    <div class="preloader-body">
+        <div id="loadingProgressG">
+            <div class="loadingProgressG" id="loadingProgressG_1"></div>
+        </div>
+    </div>
+</div>
+<!-- Breadcrumbs -->
+
+{% comment %} <div class="breadcrumbs-custom-inner text center"><br> {% endcomment %}
+    <div class="container container-big mt-5 pt-5">
+        <div class="row align-items-center mt-5 pt-5">
+            <div class="col text-center">
+            <h3>Thank you for completing all the steps.Your request is being processed,we will contact you
+                shortly </h3>
+            </div>
+        </div>
+        <div class="row align-items-center ">
+            <div class="col text-center">
+                <p>Reviewing Your Request</p>
+            </div>
+        </div>
+    </div>
+{% comment %} </div> {% endcomment %}
+
+{% endblock content %}

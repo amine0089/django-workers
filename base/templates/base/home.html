@@ -1,0 +1,238 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block title %}
+<title>Home - SolomartelHoldings</title>
+{% endblock title %}
+
+{% block active_tab %}
+                                <li class="rd-nav-item active">
+                                    <a class="rd-nav-link" href="{% url 'base:home' %}">Home</a>
+                                </li>
+                                <li class="rd-nav-item">
+                                    <a class="rd-nav-link" href="{% url 'base:investments' %}">
+                                        Investments
+                                    </a>
+                                </li>
+                                
+                                <li class="rd-nav-item">
+                                    <a class="rd-nav-link" href="{% url 'base:faq' %}">
+                                        FAQ
+                                    </a>
+                                </li>
+                                <li class="rd-nav-item"><a class="rd-nav-link"
+                                                           href="{% url 'base:contacts' %}">Contact</a>
+                                </li>
+{% endblock active_tab %}
+
+{% block content %}
+
+<div class="ie-panel"><a href="http://windows.microsoft.com/en-US/internet-explorer/"><img
+        src="{% static 'images/ie8-panel/warning_bar_0000_us.jpg' %}" height="42" width="820"
+        alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today."></a>
+</div>
+<div class="preloader">
+    <div class="preloader-logo"><img src="{% static 'images/logo.png' %}" alt="" width="201px" height="94px"
+                                     srcset="{% static 'images/logo.png' %} 2x"/>
+    </div>
+    <div class="preloader-body">
+        <div id="loadingProgressG">
+            <div class="loadingProgressG" id="loadingProgressG_1"></div>
+        </div>
+    </div>
+</div>
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li {% if message.tags %} class="alert-{{ message.tags }}" {% endif %}>
+        {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Important: {% endif %}
+        {{ message }}
+    </li>
+    {% endfor %}
+</ul>
+{% endif %}
+<section class="section swiper-container swiper-slider swiper-slider-minimal" data-loop="true" data-slide-effect="fade"
+         data-autoplay="4759" data-simulate-touch="true">
+    <div class="swiper-wrapper">
+        <div class="swiper-slide swiper-slide_video margin-img" data-slide-bg="{% static 'images/banner.png' %}">
+        </div>
+    </div>
+</section>
+
+<!-- How it works section -->
+<h3 class="text-uppercase font-weight-bold wow-outer text-center">
+            <span class="wow slideInDown mb-5 barofcolour">How it works ?</span>
+        </h3>
+<section class="section novi-background section-md text-center">
+    <div class="container">
+        
+
+        <div class="row">
+            <div class="col-lg-10 col-xl-12">
+                <div class="row row-30">
+                    <div class="col-md-3 d-flex flex-column justify-content-center align-items-center">
+                        <img src="{% static 'images/icon-1.png' %}" alt="" width="80" height="80"/>
+                        <h6 class="mt-2 font-weight-bold">We buy the deals</h6>
+                    </div>
+                    <div class="col-md-9 d-flex align-items-center">
+                        <p>Solomartel holdings finds the deals,negotiates a price and puts it under contract.All of the
+                            properties the we put under contract have a 23%+ gross total ROI (usually higher). And all
+                            of our properties have a safety margin meaning that we can always resell the properties at a
+                            profit of up to 190% in some cases which means this strategy is virtually risk free for the
+                            investor.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-10 col-xl-12">
+                <div class="row row-30">
+                    <div class="col-md-3 d-flex flex-column justify-content-center align-items-center">
+                        <img src="{% static 'images/icon-2.png' %}" alt="" width="80" height="80"/>
+                        <h6 class="mt-2 font-weight-bold">You Invest</h6>
+                    </div>
+                    <div class="col-md-9 d-flex align-items-center">
+                        <p>Our investors become our investment partners and own actual real estate by becoming members
+                            of our companies.This isn’t an REIT nor a stock</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-10 col-xl-12">
+                <div class="row row-30">
+                    <div class="col-md-3 d-flex flex-column justify-content-center align-items-center">
+                        <img src="{% static 'images/icon-3.png' %}" alt="" width="80" height="80"/>
+                        <h6 class="mt-2 font-weight-bold">We manage the properties</h6>
+                    </div>
+                    <div class="col-md-9 d-flex align-items-center">
+                        <p>We take care of the process of putting creditworthy tenants in properties and take care of
+                            the repairs to keep the properties in perfect shape.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-10 col-xl-12">
+                <div class="row row-30">
+                    <div class="col-md-3 d-flex flex-column justify-content-center align-items-center">
+                        <img src="{% static 'images/icon-4.png' %}" alt="" width="80" height="80"/>
+                        <h6 class="mt-2 font-weight-bold">We collect rent and you get paid</h6>
+                    </div>
+                    <div class="col-md-9 d-flex align-items-center">
+                        <p>Our properties generate monthly rental payments from our tenant which we pay out monthly to
+                            our partners,you.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- Testimonials section -->
+<section class="section novi-background section-lg text-center">
+<h3 class="text-uppercase font-weight-bold wow-outer">
+    <span class="wow slideInDown mb-5 barofcolour">Testimonials</span>
+</h3>
+    <div class="container">
+        <!-- Owl Carousel-->
+        <div class="owl-carousel wow fadeIn" data-items="1" data-md-items="2" data-lg-items="3" data-dots="false"
+             data-nav="true" data-loop="true" data-autoplay="true" data-autoplay-speed="731"
+             data-autoplay-timeout="4268" data-margin="30" data-stage-padding="0" data-mouse-drag="false">
+
+            {% for testimonial in testimonials %}
+            {% if testimonial.url %}
+            <blockquote class="quote-classic">
+                <div class="quote-classic-text">
+                    <object style="height: 300px; width: 300px">
+                        <param name="movie" value="https://youtu.be/{{ testimonial.url }}?version=3">
+                        <param name="allowFullScreen" value="true">
+                        <param name="allowScriptAccess" value="always">
+                        <embed src="http://www.youtube.com/v/{{ testimonial.url }}?version=3"
+                               type="application/x-shockwave-flash" allowfullscreen="true" allowScriptAccess="always"
+                               width="350" height="300">
+                    </object>
+                </div>
+            </blockquote>
+            {% else %}
+            <blockquote class="quote-classic">
+                <div class="quote-classic-meta">
+                    <div class="quote-classic-avatar"><img src="{{ testimonial.client_photo.url }}"
+                                                           alt="" width="96" height="96"/>
+                    </div>
+                    <div class="quote-classic-info">
+                        <cite class="quote-classic-cite">{{ testimonial.client_name }}</cite>
+                        <p class="quote-classic-caption">Regular Client</p>
+                    </div>
+                </div>
+                <div class="quote-classic-text">
+                    <p>{{ testimonial.testimonial }}</p>
+                </div>
+            </blockquote>
+            {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="mar">
+<h3 class="text-uppercase font-weight-bold wow-outer text-center text-white"><span
+                        class="wow slideInDown my-3 barofcolour ">WHY INVEST WITH SOLOMARTEL ?</span>
+                </h3>
+</section>
+<section class="section swiper-container swiper-slider swiper-slider-minimal" data-loop="false"
+         data-simulate-touch="false">
+    <div class="swiper-wrapper">
+        <div class="swiper-slide swiper-slide_video" data-slide-bg="{% static 'images/banner2.jpg' %}">
+            <div class="d-flex flex-column justify-content-center align-is-center">
+                <div class="d-flex flex-column special mb-4">
+                    <div class="row d-flex justify-content-around">
+                        <div class="col-md-4 d-flex flex-column justify-content-center align-items-center">
+                            <img src="{% static 'images/icon-5.png' %}" alt="" width="80" height="80"/>
+                            <h4 class="mt-1">STABILITY</h4>
+                            <p class="mt-2">Real estate has historically been less volatile and outperformed most of the
+                                NYSE</p>
+                        </div>
+                        <div class="col-md-4 d-flex flex-column justify-content-center align-items-center">
+                            <img src="{% static 'images/icon-6.png' %}" alt="" width="80" height="80"/>
+                            <h4 class="mt-1">CASH FLOW</h4>
+                            <p class="mt-2">Tenants pay monthly rent which covers all expenses and provides profit to
+                                the owners.</p>
+                        </div>
+                        <div class="col-md-4 d-flex flex-column justify-content-center align-items-center">
+                            <img src="{% static 'images/icon-7.png' %}" alt="" width="80" height="80"/>
+                            <h4 class="mt-1">APPRECIATION</h4>
+                            <p class="mt-2">All of our properties can only appreciate in value</p>
+                        </div>
+                        <div class="col-md-4 d-flex flex-column justify-content-center align-items-center">
+                            <img src="{% static 'images/icon-8.png' %}" alt="" width="80" height="80"/>
+                            <h4 class="mt-2">TAX BENEFITS</h4>
+                            <p class="mt-2">Investing in real estate offers many tax benefits such as
+                                depreciation,repairs write off and even the 20% tax deduction on pass through
+                                businesses.</p>
+                        </div>
+                        <div class="col-md-4 d-flex flex-column justify-content-center align-items-center">
+                            <img src="{% static 'images/icon-9.png' %}" alt="" width="80" height="80"/>
+                            <h4 class="mt-1">Risk free/Low risk</h4>
+                            <p class="mt-2">All of our properties have a safety margin and can always be resold at a
+                                high profit. This is because we negotiate deals low and the amount invested is always
+                                lower than the actual value of the property,this leaves the investors with no risk.</p>
+                        </div>
+                        <div class="col-md-4 d-flex flex-column justify-content-center align-items-center">
+                            <img src="{% static 'images/icon-10.png' %}" alt="" width="80" height="80"/>
+                            <h4 class="mt-1">STEADY RETURNS</h4>
+                            <p class="mt-2">Real estate provides returns that do not significantly decrease in the event
+                                of an economic crisis,even during the 2007-2008 subprime mortgage and world economic
+                                crises,the rents on our properties did not dip more than 25% of their pre-crisis
+                                value.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Global Mailform Output-->
+<div class="snackbars" id="form-output-global"></div>
+{% endblock content %}

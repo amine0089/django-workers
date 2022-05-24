@@ -1,0 +1,173 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block title %}
+<title>Transactions - Solomartel </title>
+{% endblock title %}
+
+
+{% block active_tab %}
+                                <li class="rd-nav-item ">
+                                    <a class="rd-nav-link" href="{% url 'base:home' %}">Home</a>
+                                </li>
+                                <li class="rd-nav-item ">
+                                    <a class="rd-nav-link" href="{% url 'base:investments' %}">
+                                        Investments
+                                    </a>
+                                </li>
+                                
+                                <li class="rd-nav-item">
+                                    <a class="rd-nav-link" href="{% url 'base:faq' %}">
+                                        FAQ
+                                    </a>
+                                </li>
+                                <li class="rd-nav-item"><a class="rd-nav-link"
+                                                           href="{% url 'base:contacts' %}">Contact</a>
+                                </li>
+{% endblock active_tab %}
+
+{% block content %}
+
+
+<!--Messages -->
+<div class="widget-content ">
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        {% if 'success' in message.tags %}
+        <li>
+            <div class="alert-success">
+                {{ message }}
+            </div>
+        </li>
+        {% endif %}
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% if messages %}
+    <ul class="msg_error_class">
+        {% for message in messages %}
+        {% if 'error' in message.tags %}
+        <li>
+            <div class="alert-danger">
+                {{ message }}
+            </div>
+        </li>
+        {% endif %}
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% if msg %}
+    <div class="alert-danger" id="msg">{{msg}}</div>
+    {% endif %}
+
+<!--End Messages -->
+
+<!-- Start of transactions list-->
+
+{% if all_transactions %}
+<div class="pages">
+    <div class="row flex-column">
+        <h2 class="text-center mt-4">Your transactions</h2>
+    </div>
+        {% for transaction in all_transactions %}
+            {% if transaction.investment.closed == False or transaction.approved == False   %}
+        <div class="row justify-content-center mx-2" id="boxes" style="margin-bottom: 100px;">
+            <div class="col-md-2 col-sm-12 col-xs-12 col-lg-3">
+                <img width="335" style="height: 200px !important;"
+                     src="{{ transaction.investment.my_images.all.0.image.url }}"
+                     alt="{{ transaction.investment.name }}'s image">
+            </div>
+            <div class="row flex-column mt-auto justify-content-between col-md-10 col-sm-12 col-lg-9 col-xs-10"
+                 style="background: #f2f9ff;">
+                <div class="row">
+                    <div class="col-md-3 pl-5 pt-2">
+                        <h6>{{ transaction.investment.name }}</h6>
+                    </div>
+                    <div class="row mt-0 pt-2 col-md-9 col-xs-12 col-lg-9 col-sm-12">
+                        <div class="col-12 col-md-3 col-sm-6 col-xs-12 text-right">
+                            Transaction ID<br>
+                            <strong>#{{ transaction.id }}</strong>
+                        </div>
+                        <div class="col-12 col-md-3 col-sm-6 text-right">
+                            Amount<br>
+                            <strong>{{ transaction.invested_amount }}</strong>
+                        </div>
+                        <div class="col-12 col-md-3 col-sm-6 text-right">
+                            Submitted date<br>
+                            <strong>{{ transaction.invest_date | date:"SHORT_DATE_FORMAT" }}</strong>
+                        </div>
+                        <div class="col-12 col-md-3 col-sm-6 text-right">
+                            Funds data<br>
+                            <strong>...</strong>
+                        </div>
+                    </div>
+                </div>
+
+
+                {% if not transaction.done %}
+                <div class="row justify-content-center align-items-center"
+                     style="background-color: #0a4a7f; font-family: Roboto, Sans-serif; height: 60px;">
+                    <a href="{% url 'base:choose_payment' transaction.id %}"
+                       class="btn col-11 col-md-11 col-sm-11 col-lg-11 col-xs-11 text-white"> Pay Here <i style="font-style: normal;" class="fa fa-arrow-circle-o-down"
+                                                                     aria-hidden="true"></i>
+                    </a>
+                    <h4  style="padding-bottom:17px"; data-toggle="modal" data-target="#myModal_{{transaction.id}}" class="btn col-1 col-md-1 col-sm-1 col-xs-1 col-lg-1"><i class="fa fa-trash"
+                                                                                                   aria-hidden="true"
+                                                                                                   style="font-style: normal; color: #FFFFFF"></i>
+                    </h4>
+                </div>
+
+
+                    <div class="modal fade" id="myModal_{{transaction.id}}">
+                        <div class="modal-dialog">
+                            <div class="modal-content" style="">
+                                <div class="modal-body">
+                                    <p style="font-family: sans-serif;">Are you sure you want to Delete the Offer with ID number #{{transaction.id}} of {{transaction.invested_amount}} $ submitted on {{transaction.invest_date | date:"SHORT_DATE_FORMAT"}}? </p>
+                                </div>
+                                <!-- Modal footer -->
+                                <div class="modal-footer justify-content-center">
+                                    <a href="{% url 'base:delete_investment' transaction.id %}">
+                                        <button type="button" class="btn btn-danger">Yes</button>
+                                    </a>
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                
+                {% elif transaction.done and not transaction.approved %}
+                <div class="row align-items-center justify-content-end"
+                     style="background-color: #FF4500; font-family: Roboto, Sans-serif; height: 60px; ">
+                    <span style="cursor:default;" class="btn btn-block text-white">Pending approval</span>
+                </div>
+                {% elif transaction.done and transaction.approved %}
+                <div class="row align-items-center justify-content-end"
+                     style="background-color: #008000; font-family: Roboto, Sans-serif; height: 60px;">
+                    <span style="cursor:default;" class="btn btn-block text-white">Approved</span>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
+    {% endfor %}
+    {% else %}
+    <div class="container-fluid flex-column mt-5 pt-5" style="margin-bottom:48px; padding-bottom:48px;">
+        <div class="d-flex text-center pt-5 mt-5">
+                <div class="col-md-12 alert alert-success" id="msg">
+                    <h3>At the moment you have no offer in progress, please come back after you submit an offer.</h3>       
+            </div>
+
+            
+        </div>
+    </div>
+
+    
+
+
+
+    {% endif %}
+</div>
+
+
+{% endblock content %}
+

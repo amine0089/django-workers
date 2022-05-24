@@ -1,0 +1,139 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block title %}
+<title>Payment - Solomartel</title>
+{% endblock title %}
+
+
+{% block active_tab %}
+                                <li class="rd-nav-item ">
+                                    <a class="rd-nav-link" href="{% url 'base:home' %}">Home</a>
+                                </li>
+                                <li class="rd-nav-item ">
+                                    <a class="rd-nav-link" href="{% url 'base:investments' %}">
+                                        Investments
+                                    </a>
+                                </li>
+                                
+                                <li class="rd-nav-item">
+                                    <a class="rd-nav-link" href="{% url 'base:faq' %}">
+                                        FAQ
+                                    </a>
+                                </li>
+                                <li class="rd-nav-item"><a class="rd-nav-link"
+                                                           href="{% url 'base:contacts' %}">Contact</a>
+                                </li>
+{% endblock active_tab %}
+
+{% block content %}
+<style type="text/css">
+   .form-control.has-error {
+   border: 1px solid #FB404B !important;
+   color: #FB404B !important;
+   }
+   .form-control.has-success {
+   border: 1px solid #28a745 !important;
+   color: #28a745 !important;
+   }
+   .error-msg {
+   color: red;
+   font-size: 13px;
+   margin: 3px;
+   }
+
+
+</style>
+<link rel="stylesheet" href="{% static 'css/new_style.css' %}" id="main-styles-link">
+<div class="preloader">
+    <div class="preloader-logo"><img src="{% static 'images/logo.png' %}" alt="" width="201px" height="94px"
+                                     srcset="{% static 'images/logo.png' %} 2x"/>
+    </div>
+    <div class="preloader-body">
+        <div id="loadingProgressG">
+            <div class="loadingProgressG" id="loadingProgressG_1"></div>
+        </div>
+    </div>
+</div>
+<div class="col text-left mt-3 pt-2">
+    <a href="{% url 'base:choose_payment' tid %}" class="btn btn-warning "> <i class="fas fa-arrow-left"></i>   Back to Payment Methods</a> 
+</div>
+
+<section class=" container section novi-background" style="padding-top: 75px;">
+    <h4 style="margin-top: 0px">Direct Bank transfer</h4>
+
+    <p style="margin-top: 0px text-justify">Instructions: to complete your transaction please wire an amount of {{transaction.invested_amount}}$ to the bank account
+with the following information.  Once you are done, click the confirm button to confirm your
+transaction, make sure to only do so after your funds have been sent. We will then confirm
+the receival of the bank transfer on our end and approve the transaction.
+We will contact you once the confirmation has been done
+Please check the wiring information carefully before transferring the funds.
+We also recommend that you keep a record of the transaction you made until the transaction
+has been approved.</p>
+    {% if message %}
+    <br>
+    <div class="alert alert-danger" id="msg">{{message}}</div>
+    {% endif %}
+    <div role="form" class="wpcf7 p-4" id="wpcf7-f8293-p8709-o4" lang="en-US" dir="ltr">
+        <div class="screen-reader-response"></div>
+        <form action="{% url 'payment:banktransfer' tid %}" method="POST" id="direct_bank_form" class="wpcf7-form"> {% csrf_token %}
+
+
+            <div class="row flex-column pl-5 pb-5">
+                <div class="row flex-column">
+                    <p><strong>Bank name: </strong>{{ investment.bank_name }} </p>
+                </div>
+                
+                <div class="row flex-column">
+                    <p><strong>Bank address:</strong> {{ investment.bank_address }}</p>
+                </div>
+                <div class="row flex-column">
+                    <p><strong>ABA: </strong>{{ investment.ABA_number }}</p>
+                    <p style="font-size: small;">(Routing number / American Banker's Association number)</p>
+                    <p style="font-size: small;">Only needed for domestic transfers within the USA".</p>
+                </div>
+                <div class="row flex-column">
+                    <p><strong>Our Swift/BIC: </strong>{{ investment.swift_code }}</p>
+                    <p style="font-size: small;">(Bank identifier code also known as CHIPS/NCC/BSC/... or IFSC)</p>
+                    <p style="font-size: small;">Only needed for transfers from abroad".</p>
+                </div>
+                <div class="row flex-column">
+                    <p><strong>Company's address:</strong> {{ investment.company_address }}</p>
+                </div>
+                <div class="row flex-column">
+                    <p><strong>Account number:</strong> {{ investment.account_number }}</p>
+                    <p style="font-size: small;">Free format.</p>
+                </div>
+                <div class="col-xs-10 col-sm-10 text-center">
+                    <br>
+        <div class="col-xs-12 col-sm-12">
+            <div class="form-group">
+                <span class="wpcf7-form-control-wrap acceptance-430">
+                    <span class="wpcf7-form-control wpcf7-acceptance">
+                        <span class="wpcf7-list-item"><input type="checkbox" id="transfer_made">
+                        <span class="error-msg" id="checked_label"></span>
+                        <strong><span class="wpcf7-list-item-label">I/We have made the transfer to the account with the details specified above</span></strong>
+                        </span>
+                    </span>
+                </span>
+            </div>
+        </div>
+        
+        <div class="col text-center mb-4">
+            <br>
+            <a href="{% url 'payment:banktransfer' tid %}">
+                <input type="button" id="bank_transfer_button" style="background-color: #0a4a7f !important;"
+                       value="Invest"
+                       class="btn text-white" disabled></a>
+                       
+        </div>
+
+
+
+        </form>
+
+        </div>
+
+    </div>
+</section>
+<script src="https://js.stripe.com/v3/"></script>
+{% endblock content %}

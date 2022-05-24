@@ -1,0 +1,89 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block title %}
+<title> Investments - SolomartelHoldings </title>
+{% endblock title %}
+
+{% block active_tab %}
+                                <li class="rd-nav-item ">
+                                    <a class="rd-nav-link" href="{% url 'base:home' %}">Home</a>
+                                </li>
+                                <li class="rd-nav-item ">
+                                    <a class="rd-nav-link" href="{% url 'base:investments' %}">
+                                        Investments
+                                    </a>
+                                </li>
+                                
+                                <li class="rd-nav-item">
+                                    <a class="rd-nav-link" href="{% url 'base:faq' %}">
+                                        FAQ
+                                    </a>
+                                </li>
+                                <li class="rd-nav-item"><a class="rd-nav-link"
+                                                           href="{% url 'base:contacts' %}">Contact</a>
+                                </li>
+{% endblock active_tab %}
+
+{% block content %}
+<style type="text/css">
+   p {
+    background:none !important;
+}
+</style>
+<div class="preloader">
+    <div class="preloader-logo"><img src="{% static 'images/logo.png' %}" alt="" width="201px" height="94px"
+                                     srcset="{% static 'images/logo.png' %} 2x"/>
+    </div>
+    <div class="preloader-body">
+        <div id="loadingProgressG">
+            <div class="loadingProgressG" id="loadingProgressG_1"></div>
+        </div>
+    </div>
+</div>
+<section class="section novi-background" style="padding-top: 80px;">
+    <div class="mx-3">
+         {% if transactions %}
+        <div class="row justify-content-center align-items-center">
+            {% for transaction in transactions %}
+            <div class="card col-10 col-sm-6 col-md-4 col-lg-4 col-xl-4 my-3" style="width: 18rem;">
+                <img class="card-img-top" src="{{ transaction.investment.my_images.all.0.image.url }}"
+                     alt="Card image cap" width="420" height="262">
+                <div class="card-body border">
+                    <h5 class="card-title font-weight-bold text-center mb-3">{{ transaction.investment.name }}</h5>
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <strong>Minimum investments: </strong><span>{{ transaction.investment.minimum_investment }}%</span>
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Gross yearly ROI: </strong><span>{{ transaction.investment.gross_returns }}%</span>
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Net yearly returns: </strong> <span>{{ transaction.investment.net_returns }}%</span>
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Total fund investment amount: </strong><span>{{ transaction.investment.invested_amount }}$</span>
+                        </li>
+                        <li class="list-group-item" style="border-bottom-left-radius: 0px; border-bottom-right-radius: 0px;">
+                            <strong>Your investment: </strong><span>{{ transaction.invested_amount }}$</span>
+                        </li>
+                        <li class="list-group-item" style="border-bottom-left-radius: 0px; border-bottom-right-radius: 0px;">
+                            <strong>Property market value: </strong><span>{{ transaction.investment.market_value }}$</span>
+                        </li>
+                    </ul>
+                    <a href="{% url 'base:investment' transaction.investment.name %}" class="btn btn-block text-white" style="background-color: #0a4a7f; border-top-left-radius: 0px; border-top-right-radius: 0px;">Details</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <br><br><br><br><br><br>
+        <div class="breadcrumbs-custom-inner" ><br>
+            <br><br>
+        <div class="alert alert-success" style="margin-left: 400px" id="msg"><h3>Sorry, You have not transferred any funds yet,</h3><h3> Check back after you transfer an fund </h3><br><span style="margin-left: 200px">Solomortal Investment Fund</span></div>
+    </div>
+</div>
+        {% endif %}
+    </div>
+</section>
+{% endblock content %}

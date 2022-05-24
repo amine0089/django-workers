@@ -1,0 +1,113 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block title %}
+<title>Payment - Solomartel</title>
+{% endblock title %}
+
+
+{% block active_tab %}
+                                <li class="rd-nav-item ">
+                                    <a class="rd-nav-link" href="{% url 'base:home' %}">Home</a>
+                                </li>
+                                <li class="rd-nav-item ">
+                                    <a class="rd-nav-link" href="{% url 'base:investments' %}">
+                                        Investments
+                                    </a>
+                                </li>
+                                
+                                <li class="rd-nav-item">
+                                    <a class="rd-nav-link" href="{% url 'base:faq' %}">
+                                        FAQ
+                                    </a>
+                                </li>
+                                <li class="rd-nav-item"><a class="rd-nav-link"
+                                                           href="{% url 'base:contacts' %}">Contact</a>
+                                </li>
+{% endblock active_tab %}
+
+{% block content %}
+<div class="preloader">
+    <div class="preloader-logo"><img src="{% static 'images/logo.png' %}" alt="" width="201px" height="94px"
+                                     srcset="{% static 'images/logo.png' %} 2x"/>
+    </div>
+    <div class="preloader-body">
+        <div id="loadingProgressG">
+            <div class="loadingProgressG" id="loadingProgressG_1"></div>
+        </div>
+    </div>
+</div>
+<link rel="stylesheet" href="{% static 'css/style.css' %}" id="main-styles-link">
+
+<div class="col text-left mt-3 pt-2">
+    <a href="{% url 'base:choose_payment' obj_invest.id %}" class="btn btn-warning "> <i class="fas fa-arrow-left"></i>   Back to Payment Methods</a> 
+</div>
+
+<section class=" container section novi-background" style="padding-top: 75px;">
+    <h4 style="margin-top: 0px">Credit Card</h4>
+
+    {% if message %}
+    <br>
+    <div class="alert alert-danger" id="msg">{{message}}</div>
+    {% endif %}
+    <div role="form" class="wpcf7 p-4" id="wpcf7-f8293-p8709-o4" lang="en-US" dir="ltr">
+        <div class="screen-reader-response"></div>
+        <form action="{% url 'payment:charge' id_offer_obj %}" method="POST"
+              id="credit_card_form" class="wpcf7-form">
+            {% csrf_token %}
+            <div class="row justify-content-center">
+                <div class="col-xs-12 col-sm-12">
+                    <div class="form-group">
+                        <strong><label>Card Number </label></strong><br>
+                        <span class="wpcf7-form-control-wrap propertyname"><input
+                                type="text" name="creditcardnumber"
+                                id="creditcardnumber_number" maxlength="19"
+                                placeholder="XXXX XXXX XXXX XXXX"
+                                class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required"
+                                onkeypress="CreditCardNumber()"></span>
+                    </div>
+                </div>
+                <div class="col-xs-6 col-sm-6">
+                    <div class="form-group">
+                        <strong><label>Expiry (MM/YY) </label></strong><br>
+                        <span class="wpcf7-form-control-wrap investmentamount"><input
+                                type="expiry" name="month_year"
+                                maxlength="5"
+                                id="checkexpiry"
+                                class="wpcf7-form-control wpcf7-number wpcf7-validates-as-required wpcf7-validates-as-number form-control"
+                                onkeypress="ExpiaryDateCheck()"
+                                placeholder="MM/YY"></span>
+                    </div>
+                </div>
+                <div class="col-xs-6 col-sm-6">
+                    <div class="form-group">
+                        <strong><label>Card Code</label></strong><br>
+                        <span class="wpcf7-form-control-wrap investmentamount"><input
+                                type="name" name="cardcode"
+                                id="cardcode"
+                                class="wpcf7-form-control wpcf7-number wpcf7-validates-as-required wpcf7-validates-as-number form-control"
+                                maxlength="3"
+                                placeholder="CVV"></span>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12">
+                    <div class="form-group">
+                        <strong><label>Amount(in USD) </label></strong><br>
+                        <span class="wpcf7-form-control-wrap phonenumber"><input
+                                type="number" name="amount_entered" size="40"
+                                value={{ obj_invest.invested_amount }}
+                                id="inveted_Amount"
+                                class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required form-control" readonly></span>
+                    </div>
+                </div>
+                <div class="col-xs-10 col-sm-10 text-center">
+                    <br>
+                    <input type="submit" value="Invest"
+                           class="btn text-white" style="background-color: #0a4a7f !important;"><span
+                        class="ajax-loader"></span>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
+<script src="https://js.stripe.com/v3/"></script>
+{% endblock content %}

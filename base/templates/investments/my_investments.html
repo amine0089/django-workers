@@ -1,0 +1,341 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block title %}
+<title>Investments - Solomartel </title>
+{% endblock title %}
+
+<style>
+
+    body {
+        font-family: Ubuntu Condensed;
+    }
+
+
+
+
+</style>
+{% block active_tab %}
+                                <li class="rd-nav-item ">
+                                    <a class="rd-nav-link" href="{% url 'base:home' %}">Home</a>
+                                </li>
+                                <li class="rd-nav-item ">
+                                    <a class="rd-nav-link" href="{% url 'base:investments' %}">
+                                        Investments
+                                    </a>
+                                </li>
+                                
+                                <li class="rd-nav-item">
+                                    <a class="rd-nav-link" href="{% url 'base:faq' %}">
+                                        FAQ
+                                    </a>
+                                </li>
+                                <li class="rd-nav-item"><a class="rd-nav-link"
+                                                           href="{% url 'base:contacts' %}">Contact</a>
+                                </li>
+{% endblock active_tab %}
+
+{% block content %}
+
+
+
+
+
+<!-- Breadcrumbs -->
+<!--<style>
+   #boxes{
+   float:left;
+   width:99%;
+   }
+   #leftbox {
+   float:left;
+   width:20%;
+   }
+   #middlebox{
+   float:left;
+   width:75%;
+   }
+   p {
+      background:none !important;
+      }
+   #myModal {
+   text-align: center;
+}
+.modal-body p {
+   font-size: 18px;
+}
+.alert-popup .modal-header {
+   padding: 5px 10px;
+   background-image: linear-gradient(to left, #74ebd5, #9face6);
+   background-image: -moz-linear-gradient(to left, #74ebd5, #9face6);
+   background-image: -webkit-linear-gradient(to left, #74ebd5, #9face6);
+   background-image: -o-linear-gradient(to left, #74ebd5, #9face6);
+   background-image: -ms-linear-gradient(to left, #74ebd5, #9face6);
+   color: #fff;
+   font-weight: 700;
+}
+
+.alert-popup h4.modal-title {
+   padding: 0px;
+   font-size: 20px;
+   font-weight: 500;
+}
+
+.modal-header button.close:focus {
+   outline: 0;
+}
+
+.modal-header button.close {
+   color: #fff;
+   opacity: 1;
+}
+
+.modal-footer button.btn.btn-danger:focus, .sweet-cancel:focus, .sweet-cancel:hover {
+   box-shadow: none;
+   outline: 0;
+   border-color: transparent;
+}
+
+.modal-footer button.btn.btn-danger, .sweet-cancel {
+   opacity: 1;
+   border-color: transparent;
+   box-shadow: none;
+   outline: 0;
+   padding: 4px 20px;
+   background-color: #116fbc !important;
+}
+
+.alert-popup .modal-body {
+   text-align: center;
+}
+
+.alert-popup .modal-body .fa {
+   font-size: 60px;
+   color: #83d5db;
+}
+
+.alert-popup .modal-body p {
+   margin: 0;
+}
+
+.alert-popup .modal-dialog {
+   border-color: transparent;
+   margin: 150px auto;
+}
+.modal.show .modal-dialog {
+   -webkit-transform: translate(0, 0);
+   transform: translate(0, 0);
+}
+
+
+
+.modal-body .alert,
+.msg.alert {
+   display: none;
+}
+
+
+#myModel .modal-footer {
+   justify-content: center !important;
+}
+</style>-->
+
+<!--Messages -->
+
+<div class="widget-content ">
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        {% if 'success' in message.tags %}
+        <li>
+            <div class="alert-success">
+                {{ message }}
+            </div>
+        </li>
+        {% endif %}
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% if messages %}
+    <ul class="msg_error_class">
+        {% for message in messages %}
+        {% if 'error' in message.tags %}
+        <li>
+            <div class="alert-danger">
+                {{ message }}
+            </div>
+        </li>
+        {% endif %}
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% if msg %}
+    <div class="alert-danger" id="msg">{{msg}}</div>
+    {% endif %}
+
+<!--End Messages -->
+
+{% if transactions %}
+<div class="pages mt-3 py-3" style="margin-bottom: 100px">
+    <div class="row flex-column">
+        <h2 class="text-center mt-2">Your investments </h2>
+    </div>
+    <!-- Loop to closed investments-->
+        {% for transaction in investments_closed %}
+
+        <div class="row justify-content-center mx-2" id="boxes">
+            <div class="col-md-2 col-sm-12 col-xs-12 col-lg-3">
+                <img width="335" style="height: 260px !important;"
+                     src="{{media_url}}{{ transaction.investment__my_images__image}}"
+                     alt="{{ transaction.investment.name }}'s image">
+            </div>
+            <div class="row flex-column mt-auto justify-content-between col-md-10 col-sm-12 col-lg-9 col-xs-10"
+                 style="background: #f2f9ff;">
+                 <!-- If the investment is closed, show different fields-->
+                    <div class="row">
+                        <div class="col-md-3 pl-5 pt-2">
+                            <h6>{{ transaction.investment__name }}</h6>
+                        </div>
+                        <div class="row mt-0 pt-2 col-md-9 col-xs-12 col-lg-9 col-sm-12">
+                            <div class="col-12 col-md-3 col-sm-6 col-xs-12 text-right">
+                                Net Returns<br>
+                                <strong>{{ transaction.investment__net_returns }}%</strong>
+                            </div>
+                            <div class="col-12 col-md-3 col-sm-6 text-right">
+                                Amount Invested <br>
+                                <strong>{{ transaction.tot_amount}}$</strong>
+                            </div>
+                            <div class="col-12 col-md-3 col-sm-6 text-right">
+                                Gross Returns<br>
+                                <strong>{{ transaction.investment__gross_returns  }}%</strong>
+                            </div>
+                            <div class="col-12 col-md-3 col-sm-6 text-right">
+                                Market Value<br>
+                                <strong>{{ transaction.investment__market_value  }}</strong>
+                            </div>
+                        </div>
+                    </div>
+                <div class="row">
+                    <div class="modal fade" id="myModal">
+                        <div class="modal-dialog">
+                            <div class="modal-content" style="">
+                                <div class="modal-body">
+                                    <p style="font-family: sans-serif;">Are you sure you want to Delete the Offer?</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row align-items-center justify-content-end"
+                     style="background-color: #008080; font-family: Roboto, Sans-serif; height: 60px;">
+                    <a href="{% url 'base:investment' transaction.investment__name %}" style="" class="btn btn-block text-white">Acquired Investment - View Details <i style="font-style: normal;" class="fa fa-arrow-circle-o-down" aria-hidden="true"></i> </a>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+    <!-- Loop to open investments-->
+        {% for transaction in transactions %}
+
+        <div class="row justify-content-center mx-2" id="boxes">
+            <div class="col-md-2 col-sm-12 col-xs-12 col-lg-3">
+                <img width="335" style="height: 260px !important;"
+                     src="{{ transaction.investment.my_images.all.0.image.url }}"
+                     alt="{{ transaction.investment.name }}'s image">
+            </div>
+            <div class="row flex-column mt-auto justify-content-between col-md-10 col-sm-12 col-lg-9 col-xs-10"
+                 style="background: #f2f9ff;">
+                    <div class="row">
+                        <div class="col-md-3 pl-5 pt-2">
+                            <h6>{{ transaction.investment.name }}</h6>
+                        </div>
+                        <div class="row mt-0 pt-2 col-md-9 col-xs-12 col-lg-9 col-sm-12">
+                            <div class="col-12 col-md-3 col-sm-6 col-xs-12 text-right">
+                                Transaction ID<br>
+                                <strong>#{{ transaction.id }}</strong>
+                            </div>
+                            <div class="col-12 col-md-3 col-sm-6 text-right">
+                                Amount<br>
+                                <strong>{{ transaction.invested_amount }}$</strong>
+                            </div>
+                            <div class="col-12 col-md-3 col-sm-6 text-right">
+                                Submitted date<br>
+                                <strong>{{ transaction.invest_date | date:"SHORT_DATE_FORMAT" }}</strong>
+                            </div>
+                            <div class="col-12 col-md-3 col-sm-6 text-right">
+                                Funds data<br>
+                                <strong>...</strong>
+                            </div>
+                        </div>
+                    </div>
+                <div class="row">
+                    {% if not transaction.done %}
+                    <a style="" data-toggle="modal" data-target="#myModal" class="btn btn-block">Delete Offer
+                        <i class="fa fa-trash" aria-hidden="true" style="font-style: normal;"></i>
+                    </a>
+                    {% endif %}
+                    <div class="modal fade" id="myModal">
+                        <div class="modal-dialog">
+                            <div class="modal-content" style="">
+                                <div class="modal-body">
+                                    <p style="font-family: sans-serif;">Are you sure you want to Delete the Offer?</p>
+                                </div>
+                                <!-- Modal footer -->
+                                <div class="modal-footer justify-content-center">
+{% comment %}                                     <a href="{% url 'base:delete_investment' transaction.id %}">
+                                        <button type="button" class="btn btn-danger">Yes</button>
+                                    </a>
+{% endcomment %}                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {% if not transaction.done %}
+                <div class="row align-items-center"
+                     style="background-color: #0a4a7f; font-family: Roboto, Sans-serif; height: 60px;">
+{% comment %}                     < href="{% url 'base:choose_payment' transaction.id %}"
+                       class="btn btn-block text-white"> Pay Here <i style="" class="fa fa-share"
+                                                                     aria-hidden="true"></i>
+ {% endcomment %}                    
+                </div>
+                {% elif transaction.done and not transaction.approved %}
+                <div class="row align-items-center justify-content-end"
+                     style="background-color: #FF4500; font-family: Roboto, Sans-serif; height: 60px;">
+                    <span style="" class="btn btn-block text-white">Pending approval</span>
+                </div>
+                {% elif transaction.done and transaction.approved and transaction.investment.closed %}
+                <div class="row align-items-center justify-content-end"
+                     style="background-color: #008080; font-family: Roboto, Sans-serif; height: 60px;">
+                    <a href="{% url 'base:investment' transaction.investment.name %}" style="" class="btn btn-block text-white">Acquired Investment - View Details <i style="font-style: normal;" class="fa fa-arrow-circle-o-down" aria-hidden="true"></i> </a>
+                </div>
+                {% elif transaction.done and transaction.approved %}
+                <div class="row align-items-center justify-content-end"
+                     style="background-color: #008000; font-family: Roboto, Sans-serif; height: 60px;">
+                    <span style="" class="btn btn-block text-white">Approved</span>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    {% endfor %}
+    {% else %}
+    <div class="container-fluid flex-column mt-5 pt-5" style="margin-bottom:48px; padding-bottom:48px;">
+        <div class="d-flex text-center pt-5 mt-5">
+                <div class="col-md-12 alert alert-success" id="msg">
+                    <h3>At the moment you have no offer in progress, please come back after you submit an offer.</h3>       
+            </div>
+        </div>
+
+
+    
+
+    </div>
+{% comment %}     <div class="breadcrumbs-custom-inner text-center"><br>
+        <div class="col-md-12 alert alert-success" id="msg">
+            <h3>You still have no offer in progress, please come back after you submit an offer.</h3>
+        </div>
+    </div> {% endcomment %}
+    {% endif %}
+</div>
+
+{% endblock content %}

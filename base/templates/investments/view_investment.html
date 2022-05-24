@@ -1,0 +1,248 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block title %}
+<title>Investments - Solomartel</title>
+{% endblock title %}
+
+{% block active_tab %}
+                                <li class="rd-nav-item ">
+                                    <a class="rd-nav-link" href="{% url 'base:home' %}">Home</a>
+                                </li>
+                                <li class="rd-nav-item ">
+                                    <a class="rd-nav-link" href="{% url 'base:investments' %}">
+                                        Investments
+                                    </a>
+                                </li>
+                                
+                                <li class="rd-nav-item">
+                                    <a class="rd-nav-link" href="{% url 'base:faq' %}">
+                                        FAQ
+                                    </a>
+                                </li>
+                                <li class="rd-nav-item"><a class="rd-nav-link"
+                                                           href="{% url 'base:contacts' %}">Contact</a>
+                                </li>
+{% endblock active_tab %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}" id="main-styles-link">
+
+<style type="text/css">
+      p {
+      background:none !important;
+      }
+      .form-control.has-error {
+      border: 1px solid #FB404B !important;
+      color: #FB404B !important;
+      }
+      .form-control.has-success {
+      border: 1px solid #28a745 !important;
+      color: #28a745 !important;
+      }
+      .error-msg {
+      color: red !important;
+      font-size: 13px !important;
+      margin: 3px !important;
+      }
+      body {
+      color: #000000;
+      font-family: Ubuntu Condensed;
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 24px;
+      text-transform: none;
+      }
+
+      html { 
+      overflow-y: scroll; 
+      }
+
+
+
+</style>
+<div class="preloader">
+    <div class="preloader-logo"><img src="{% static 'images/logo.png' %}" alt="" width="201px" height="94px"
+                                     srcset="{% static 'images/logo.png' %} 2x"/>
+    </div>
+    <div class="preloader-body">
+        <div id="loadingProgressG">
+            <div class="loadingProgressG" id="loadingProgressG_1"></div>
+        </div>
+    </div>
+</div>
+<section class="detail-top detail-top-grid no-margin">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="header-detail">
+                    <div class="header-left">
+                        <div class="table-list mb-5">
+                            <div class="table-cell mt-3"><h1>{{ investment_record.name }}</h1></div>
+                            <div class="table-cell hidden-sm hidden-xs">
+                <span class="label-wrap">
+                                    </span>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="header-right">
+                        <ul class="actions">
+
+                        </ul>
+                        <span class="item-price item-price-text price-single-listing-text"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="section-detail-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+
+                <img width="720" style="height: 370px !important;"
+                     src="{{ investment_record.my_images.all.0.image.url }}/">
+
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 p-4" style="background-color: #f5f5f5;">
+                <aside id="sidebar" class="sidebar-white">
+                    <div id="" class="row flex-column" style="background-color: #fff !important color: #000000;
+                  font-family: Ubuntu Condensed;
+                  font-size: 16px;
+                  font-weight: 400;
+                  line-height: 24px;
+                  text-transform: none;">
+                        <div class="widget-top">
+                            <h4 class="widget-title">{{ investment_record.name }}</h4>
+                        </div>
+                        <div id="detail" class="detail-list target-block">
+                            <ul class="adddetails py-3">
+                                <li><strong>Total Fund Investment -: </strong><span>{{ investment_record.invested_amount }}$</span>
+                                </li>
+<!--                                <li style="margin-top: 7px"><strong>Investment made -: </strong><span>{{ client_investment.invested_amount }}$</span> -->
+                                <li style="margin-top: 7px"><strong>Investment made -: </strong><span>{{ tot_client_investment.invested_amount__sum }}$</span>
+                                </li>
+                                <li style="margin-top: 7px"><strong>Current fund market value
+                                    -: </strong><span>{{ investment_record.market_value }}$</span>
+                                </li>
+                                <li style="margin-top: 7px"><strong>Equity position ( Your fund ownership of the fund in %)
+                                    -: </strong><span>{{ percentage_invested|floatformat:2 }}%</span></li>
+                                <li style="margin-top: 7px"><strong>Gross fund return on investment
+                                    -: </strong><span>{{ investment_record.gross_returns }}%</span></li>
+                                <li style="margin-top: 7px"><strong>Net fund return on investment
+                                    -: </strong><span>{{ investment_record.net_returns }}%</span></li>
+                                <li style="margin-top: 7px;"><strong style="color: #0a4a7f;">Current state
+                                    -: </strong><span>{{ investment_record.current_state }}</span></li>
+                            </ul>
+                        </div>
+                        {% if user.is_authenticated %}
+                        <a href="https://calendly.com/solomartelholdings/thesolomartelclub?month=2019-12"
+                           class="btn btn-block text-white mt-3"
+                           style="margin-top: 3px; padding: 1em 2; font-size:
+                     1em;background: green; font-family: Roboto, Sans-serif;">Schedule Call</a>
+                        {% endif %}
+                    </div>
+                </aside>
+            </div>
+        </div>
+        <div id="description" class="property-description detail-block target-block"
+             style="background-color: #fff !important color: #000000;
+                          font-family: Ubuntu Condensed;
+                          font-size: 16px;
+                          font-weight: 400;
+                          line-height: 24px;
+                          text-transform: none;">
+            <nav class="my-5">
+                <div class="d-flex nav nav-tabs" id="nav-tab" role="tablist">
+
+                    <a class="nav-item nav-link active col-md-4 text-center" id="documents_tab" data-toggle="tab"
+                       href="#documents_div"
+                       role="tab" aria-controls="documents_div" aria-selected="true">
+                        Documents
+                    </a>
+
+                    <a class="nav-item nav-link col-md-4 text-center" id="emergency_tab" data-toggle="tab"
+                       href="#emergency_div" role="tab"
+                       aria-controls="emergency_div" aria-selected="false">
+                        Emergency contact
+                    </a>
+
+                    <a class="nav-item nav-link col-md-4 text-center" id="distribution_tab" data-toggle="tab"
+                       href="#distribution_div"
+                       role="tab" aria-controls="distribution_div" aria-selected="false">
+                        Distributions
+                    </a>
+
+                </div>
+            </nav>
+            <div class="tab-content">
+                <div class="tab-pane fade" id="documents_div" role="tabpanel"
+                     aria-labelledby="documents_tab">
+                    <div class="row">
+                        <div class="col-md-12 pl-3 pl-1">
+                            {% if investment_record.my_documents.all %}
+                            <ul class="list-group">
+
+                                {% for document in investment_record.my_documents.all %}
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    {{ document }}
+                                    <a href="{{ document.file.url }}" style="color: inherit;"><i class="fa fa-download"
+                                                                                                 aria-hidden="true"
+                                                                                                 style="font-style: normal;"></i></a>
+                                </li>
+                                {% endfor %}
+
+
+                            </ul>
+                            {% else %}
+                            <h6 class="text-center" style="text-transform: none;">No documents available for this
+                                investment</h6>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="emergency_div" role="tabpanel" aria-labelledby="emergency_tab">
+                    <div class="row justify-content-center">
+                        <div class="col-md-12 pl-3 pl-1 text-center">
+                            <h6 style="text-transform: none;">“If you need assistance, feel free to call our customer
+                                support line:”</h6>
+                            <h6 style="text-transform: none;">email: emailaddress@solomartelholdings.com</h6>
+                            <h6 style="text-transform: none;">Emergency line: +1 412 203 4269</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade show active" id="distribution_div" role="tabpanel" aria-labelledby="distribution_tab">
+                    <div class="row">
+                        <div class="col-md-12 pl-3 pl-1">
+                            <table class="table table-bordered">
+                                <thead>
+                                <tr>
+                                    <th scope="col">Date</th>
+                                    <th scope="col">Amount distributed(in $)</th>
+                                    <th scope="col">Net return on investment(in %}</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for distribution in new_distributions %}
+                                    <tr>
+                                        <td scope="row">{{ distribution.distribution_date|date:'SHORT_DATE_FORMAT' }}</td>
+                                        <td>{{ distribution.client_amount }}$</td>
+                                        <td>{{ distribution.roi }}%</td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- #schedule_tour -->
+            <br>
+        </div>
+    </div>
+</section>
+<!-- Page Header-->
+<!-- Breadcrumbs -->
+
+{% endblock content %}
